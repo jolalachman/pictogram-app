@@ -14,11 +14,14 @@ import {
   IonButton,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../../services';
+import { AuthModel } from '../../../../models';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss'],
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.scss'],
   standalone: true,
   imports: [
     IonList,
@@ -32,10 +35,10 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
   ],
 })
-export class LoginFormComponent {
+export class RegisterFormComponent {
   passwordRegex: RegExp = /^(?=.{8,}).*$/;
 
-  loginForm = this.fb.group({
+  registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
@@ -43,10 +46,16 @@ export class LoginFormComponent {
     ],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  login() {
-    // TODO
-    console.log('login');
+  register() {
+    const authModel: AuthModel = this.registerForm.value;
+    this.authService
+      .register(authModel)
+      .finally(() => this.router.navigate(['tabs/tab1']));
   }
 }

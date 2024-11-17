@@ -5,23 +5,23 @@ import {
   IonTitle,
   IonContent,
 } from '@ionic/angular/standalone';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { RegisterFormComponent } from './components';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: 'auth.page.html',
-  styleUrls: ['auth.page.scss'],
+  selector: 'app-register',
+  templateUrl: 'register.page.html',
+  styleUrls: ['register.page.scss'],
   standalone: true,
   imports: [
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    LoginFormComponent,
+    RegisterFormComponent,
     TranslateModule,
   ],
 })
-export class AuthPage {
+export class RegisterPage {
   constructor() {}
 }
