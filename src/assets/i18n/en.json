@@ -1,6 +1,6 @@
 {
   "AUTH": {
-    "SIGN_IN": "Sing in",
+    "SIGN_IN": "Sign in",
     "EMAIL": "Email:",
     "EMAIL_INVALID": "Invalid email",
     "PASSWORD": "Password:",
