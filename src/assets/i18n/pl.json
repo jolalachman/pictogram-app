@@ -1,0 +1,12 @@
+{
+    "AUTH": {
+        "SIGN_IN": "Logowanie",
+        "EMAIL": "Email:",
+        "EMAIL_INVALID": "Niepoprawny email",
+        "PASSWORD": "Hasło:",
+        "PASSWORD_INVALID": "Niepoprawne hasło",
+        "PASSWORD_HINT": "Hasło powinno mieć co najmniej 8 znaków",
+        "SIGN_IN_BUTTON": "Zaloguj się",
+        "REGISTER": "Zarejestruj się"
+    }
+}
