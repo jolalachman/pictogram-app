@@ -9,17 +9,17 @@ export const routes: Routes = [
       {
         path: 'tab1',
         loadComponent: () =>
-          import('./components/tab1/tab1.page').then((m) => m.Tab1Page),
+          import('./components/tab1/tab1.page').then(m => m.Tab1Page),
       },
       {
         path: 'tab2',
         loadComponent: () =>
-          import('./components/tab2/tab2.page').then((m) => m.Tab2Page),
+          import('./components/tab2/tab2.page').then(m => m.Tab2Page),
       },
       {
         path: 'auth',
         loadComponent: () =>
-          import('./components/auth/auth.page').then((m) => m.AuthPage),
+          import('./components/auth/auth.page').then(m => m.AuthPage),
       },
       {
         path: '',

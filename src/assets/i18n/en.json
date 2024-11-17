@@ -1,12 +1,12 @@
 {
-    "AUTH": {
-        "SIGN_IN": "Sing in",
-        "EMAIL": "Email:",
-        "EMAIL_INVALID": "Invalid email",
-        "PASSWORD": "Password:",
-        "PASSWORD_INVALID": "Invalid password",
-        "PASSWORD_HINT": "Password should have at least 8 characters",
-        "SIGN_IN_BUTTON": "Sign in",
-        "REGISTER": "Register account"
-    }
+  "AUTH": {
+    "SIGN_IN": "Sing in",
+    "EMAIL": "Email:",
+    "EMAIL_INVALID": "Invalid email",
+    "PASSWORD": "Password:",
+    "PASSWORD_INVALID": "Invalid password",
+    "PASSWORD_HINT": "Password should have at least 8 characters",
+    "SIGN_IN_BUTTON": "Sign in",
+    "REGISTER": "Register account"
+  }
 }

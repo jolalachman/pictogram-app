@@ -8,8 +8,7 @@
           [label]="'AUTH.EMAIL' | translate"
           formControlName="email"
           [errorText]="'AUTH.EMAIL_INVALID' | translate"
-          clearInput
-        ></ion-input>
+          clearInput></ion-input>
       </ion-item>
       <ion-item class="list-item">
         <ion-input
@@ -19,16 +18,23 @@
           [helperText]="'AUTH.PASSWORD_HINT' | translate"
           formControlName="password"
           [errorText]="'AUTH.PASSWORD_INVALID' | translate"
-          clearInput
-        >
+          clearInput>
           <ion-input-password-toggle slot="end"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
       <ion-item>
-        <ion-button type="submit" class="button" size="default" [disabled]="loginForm.invalid">{{ 'AUTH.SIGN_IN_BUTTON' | translate }}</ion-button>
+        <ion-button
+          type="submit"
+          class="button"
+          size="default"
+          [disabled]="loginForm.invalid"
+          >{{ 'AUTH.SIGN_IN_BUTTON' | translate }}</ion-button
+        >
       </ion-item>
       <ion-item>
-        <ion-button class="button" fill="clear" size="small">{{ 'AUTH.REGISTER' | translate }}</ion-button>
+        <ion-button class="button" fill="clear" size="small">{{
+          'AUTH.REGISTER' | translate
+        }}</ion-button>
       </ion-item>
     </ion-list>
   </form>
