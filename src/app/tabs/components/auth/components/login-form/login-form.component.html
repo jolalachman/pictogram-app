@@ -1,0 +1,35 @@
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <ion-list lines="none" class="list">
+      <ion-item class="list-item">
+        <ion-input
+          type="email"
+          fill="solid"
+          label="Email:"
+          formControlName="email"
+          errorText="Invalid email"
+          clearInput
+        ></ion-input>
+      </ion-item>
+      <ion-item class="list-item">
+        <ion-input
+          type="password"
+          fill="solid"
+          label="Password:"
+          helperText="Password should have at least 8 characters"
+          formControlName="password"
+          errorText="Invalid password"
+          clearInput
+        >
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button type="submit" class="button" size="default" [disabled]="loginForm.invalid">Sing in</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button class="button" fill="clear">Register account</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+</div>
