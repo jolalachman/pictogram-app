@@ -44,6 +44,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
+    // TODO: Add store so refresh wont affect the result
     return !!this.auth.currentUser;
   }
 }

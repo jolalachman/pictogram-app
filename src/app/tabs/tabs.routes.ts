@@ -20,18 +20,10 @@ export const routes: Routes = [
           import('./components/tab2/tab2.page').then(m => m.Tab2Page),
       },
       {
-        path: 'sign-in',
+        path: 'auth',
         loadComponent: () =>
-          import('./components/auth/pages/login/login.page').then(
-            m => m.LoginPage
-          ),
-        ...canActivate(redirectLoggedinToTab1),
-      },
-      {
-        path: 'register',
-        loadComponent: () =>
-          import('./components/auth/pages/register/register.page').then(
-            m => m.RegisterPage
+          import('./components/auth/auth.page').then(
+            m => m.AuthPage
           ),
         ...canActivate(redirectLoggedinToTab1),
       },

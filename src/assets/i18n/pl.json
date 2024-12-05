@@ -1,12 +1,16 @@
 {
   "AUTH": {
+    "AUTHORIZATION": "Autoryzacja",
     "SIGN_IN": "Logowanie",
+    "SIGN_OUT": "Wyloguj się",
     "EMAIL": "Email:",
     "EMAIL_INVALID": "Niepoprawny email",
     "PASSWORD": "Hasło:",
     "PASSWORD_INVALID": "Niepoprawne hasło",
     "PASSWORD_HINT": "Hasło powinno mieć co najmniej 8 znaków",
     "SIGN_IN_BUTTON": "Zaloguj się",
-    "REGISTER": "Zarejestruj się"
+    "REGISTER": "Zarejestruj się",
+    "CREATE_ACCOUNT": "Stwórz konto",
+    "ALREADY_HAVE_ACCOUNT": "Posiadasz już konto?"
   }
 }

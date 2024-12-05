@@ -11,12 +11,12 @@
     </ion-tab-button>
 
     @if (!isAuthenticated()) {
-      <ion-tab-button tab="sign-in" href="/tabs/sign-in">
+      <ion-tab-button tab="auth" href="/tabs/auth">
         <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
-        <ion-label>{{ 'AUTH.SIGN_IN' | translate }}</ion-label>
+        <ion-label>{{ 'AUTH.AUTHORIZATION' | translate }}</ion-label>
       </ion-tab-button>
     } @else {
-      <ion-tab-button tab="sign-out" (click)="logout()">
+      <ion-tab-button tab="auth" (click)="logout()">
         <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
         <ion-label>{{ 'AUTH.SIGN_OUT' | translate }}</ion-label>
       </ion-tab-button>

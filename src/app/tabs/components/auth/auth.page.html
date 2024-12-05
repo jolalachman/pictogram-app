@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    @if (isLogin) {
+      <ion-title> {{ 'AUTH.SIGN_IN' | translate }} </ion-title>
+    }
+    @else {
+      <ion-title> {{ 'AUTH.REGISTER' | translate }} </ion-title>
+    }
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="tertiary" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      @if (isLogin) {
+        <ion-title size="large">{{ 'AUTH.SIGN_IN' | translate }}</ion-title>
+      }
+      @else {
+        <ion-title size="large">{{ 'AUTH.REGISTER' | translate }}</ion-title>
+      }
+    </ion-toolbar>
+  </ion-header>
+
+  @if (isLogin) {
+    <app-login-form (changeState)="onChangeState($event)"></app-login-form>
+  }
+  @else {
+    <app-register-form (changeState)="onChangeState($event)"></app-register-form>
+  }
+</ion-content>
