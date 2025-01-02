@@ -3,7 +3,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent, IonRow, IonGrid, IonCol, IonItem } from '@ionic/angular/standalone';
+  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
 import { NgFor } from '@angular/common';
@@ -13,7 +13,7 @@ import { NgFor } from '@angular/common';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonItem, IonCol, IonGrid, IonRow, 
+  imports: [IonLabel, IonItem, IonCol, IonGrid, IonRow, 
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -26,18 +26,20 @@ export class Tab1Page {
   constructor() {}
 
   wordTiles: Tile [] = [
-    {id: '1', label: 'Mama', isCustom: false, isSelected: false},
-    {id: '2', label: 'Kot', isCustom: false, isSelected: false},
-    {id: '3', label: 'Jedzenie', isCustom: false, isSelected: false},
-    {id: '4', label: 'Picie', isCustom: false, isSelected: false},
-    {id: '5', label: 'Pies', isCustom: false, isSelected: false},
-    {id: '6', label: 'Ciepło', isCustom: false, isSelected: false},
-    {id: '7', label: 'Zimno', isCustom: false, isSelected: false},
-    {id: '8', label: 'Ja', isCustom: false, isSelected: false},
-    {id: '9', label: 'Ty', isCustom: false, isSelected: false},
+    {id: '1', label: 'Mama', isCustom: false, isSelected: false, color: 'default'},
+    {id: '2', label: 'Kot', isCustom: false, isSelected: false, color: 'default'},
+    {id: '3', label: 'Jedzenie', isCustom: false, isSelected: false, color: 'default'},
+    {id: '4', label: 'Picie', isCustom: false, isSelected: false, color: 'default'},
+    {id: '5', label: 'Pies', isCustom: false, isSelected: false, color: 'default'},
+    {id: '6', label: 'Ciepło', isCustom: false, isSelected: false, color: 'default'},
+    {id: '7', label: 'Zimno', isCustom: false, isSelected: false, color: 'default'},
+    {id: '8', label: 'Ja', isCustom: false, isSelected: false, color: 'default'},
+    {id: '9', label: 'Ty', isCustom: false, isSelected: false, color: 'default'},
   ];
 
   toggleTileSelection(tile: Tile): void {
-    
+    tile.isSelected = !tile.isSelected;
+    tile.color = tile.isSelected ? "success" : "default";
+
   }
 }

@@ -15,13 +15,31 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col sizeXs="4" *ngFor="let element of wordTiles">
-        <ion-item>
-          {{element.label}}
+      <ion-col sizeXs="4" *ngFor="let tile of wordTiles">
+        <ion-item color="{{tile.color}}" (click)="toggleTileSelection(tile)">
+          {{tile.label}}
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
 
+  <div class="grid">
+    <div 
+      *ngFor="let tile of wordTiles"
+      [style.background-color]="tile.color"
+      (click)="toggleTileSelection(tile)"
+      class="tile"
+    >
+      {{ tile.label }}
+    </div>
+  </div>
+
 
 </ion-content>
+
+<!-- <ion-item>
+  <ion-label>
+    <h2>H2 Heading</h2>
+    <p>Paragraph</p>
+  </ion-label>
+</ion-item> -->

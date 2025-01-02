@@ -5,4 +5,5 @@ export interface Tile {
     isCustom: boolean;
     isSelected: boolean;
     category?: string;
+    color: string;
 }
