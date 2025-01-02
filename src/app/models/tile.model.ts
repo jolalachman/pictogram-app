@@ -4,4 +4,5 @@ export interface Tile {
     iconUrl?: string;
     isCustom: boolean;
     isSelected: boolean;
+    category?: string;
 }
