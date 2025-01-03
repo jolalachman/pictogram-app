@@ -9,6 +9,7 @@ import { Tile } from 'src/app/models/tile.model';
 import { NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart, add } from 'ionicons/icons'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -25,7 +26,7 @@ import { heart, add } from 'ionicons/icons'
   ],
 })
 export class Tab1Page {
-  constructor() {
+  constructor(public route: Router) {
 
     addIcons({heart, add});
 
@@ -51,6 +52,10 @@ export class Tab1Page {
 
   addNewTile(){
 
+  }
+
+  navigateToAddTilePage(){
+    this.route.navigate(['/add-tile']);
   }
 
 }
