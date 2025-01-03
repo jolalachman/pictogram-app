@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tab 1 </ion-title>
+    <ion-title> Zbuduj swoje zdanie </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 
   <ion-grid>
     <ion-row>
@@ -33,6 +33,15 @@
       {{ tile.label }}
     </div>
   </div>
+
+  <div class="button-container">
+    <ion-button shape="round" (click)="addNewTile()">
+      <ion-icon slot="icon-only" name="add"></ion-icon>
+    </ion-button>
+
+    <ion-button shape="round">Generuj</ion-button>
+  </div>
+
 
 
 </ion-content>

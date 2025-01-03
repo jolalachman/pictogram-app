@@ -3,17 +3,19 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel } from '@ionic/angular/standalone';
+  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
 import { NgFor } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { heart, add } from 'ionicons/icons'
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonLabel, IonItem, IonCol, IonGrid, IonRow, 
+  imports: [IonIcon, IonButton, IonLabel, IonItem, IonCol, IonGrid, IonRow, 
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -23,7 +25,11 @@ import { NgFor } from '@angular/common';
   ],
 })
 export class Tab1Page {
-  constructor() {}
+  constructor() {
+
+    addIcons({heart, add});
+
+  }
 
   wordTiles: Tile [] = [
     {id: '1', label: 'Mama', isCustom: false, isSelected: false, color: 'default'},
@@ -42,4 +48,9 @@ export class Tab1Page {
     tile.color = tile.isSelected ? "success" : "default";
 
   }
+
+  addNewTile(){
+
+  }
+
 }
