@@ -11,7 +11,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="add-tile-form">
+  <!-- <div class="add-tile-form">
     <label class="item item-input">
       <span class = "input-label">Label 1</span>
       <input type="text" placeholder="Wpisz nazwę nowej kafelki">
@@ -20,6 +20,17 @@
     <label class="item item-input">
       <input type="text" placeholder="Wybierz piktogram">
     </label>
-  </div>
+  </div> -->
+
+  <form [formGroup]="formData" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Nazwa</ion-label>
+        <ion-input formControlName="title"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button type="submit" expand="block">Dodaj</ion-button>
+  </form>
 
 </ion-content>
