@@ -4,14 +4,23 @@
 
 export const environment = {
   firebase: {
-    projectId: 'pictogram-app-5b056',
-    appId: '1:362708184117:web:de9e4c588576d70285157c',
-    storageBucket: 'pictogram-app-5b056.firebasestorage.app',
-    locationId: 'europe-central2',
-    apiKey: 'AIzaSyAP161YXgSXJ82hJJpp9N87lGs59hB4tEw',
-    authDomain: 'pictogram-app-5b056.firebaseapp.com',
-    messagingSenderId: '362708184117',
+    apiKey: "AIzaSyAYSn1sHEuddIooFrRltQVSPwegmYTuqgI",
+    authDomain: "pictogram-app-9d0e7.firebaseapp.com",
+    projectId: "pictogram-app-9d0e7",
+    storageBucket: "pictogram-app-9d0e7.firebasestorage.app",
+    messagingSenderId: "70891499467",
+    appId: "1:70891499467:web:45519582fcd6504702904e"
+
   },
+  // firebase: {
+  //   projectId: 'pictogram-app-5b056',
+  //   appId: '1:362708184117:web:de9e4c588576d70285157c',
+  //   storageBucket: 'pictogram-app-5b056.firebasestorage.app',
+  //   locationId: 'europe-central2',
+  //   apiKey: 'AIzaSyAP161YXgSXJ82hJJpp9N87lGs59hB4tEw',
+  //   authDomain: 'pictogram-app-5b056.firebaseapp.com',
+  //   messagingSenderId: '362708184117',
+  // },
   production: false,
 };
 

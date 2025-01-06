@@ -19,6 +19,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { environment } from './environments/environment';
+// import { environment } from './environments/environment.prod';
+
 // import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 // import { getStorage, provideStorage } from '@angular/fire/storage';
 
@@ -41,17 +44,18 @@ bootstrapApplication(AppComponent, {
       })
     ),
     provideFirebaseApp(() =>
-      initializeApp({
-        projectId: 'pictogram-app-5b056',
-        appId: '1:362708184117:web:de9e4c588576d70285157c',
-        storageBucket: 'pictogram-app-5b056.firebasestorage.app',
-        apiKey: 'AIzaSyAP161YXgSXJ82hJJpp9N87lGs59hB4tEw',
-        authDomain: 'pictogram-app-5b056.firebaseapp.com',
-        messagingSenderId: '362708184117',
-      })
+      initializeApp(environment.firebase)
+      // initializeApp({
+      //   projectId: 'pictogram-app-5b056',
+      //   appId: '1:362708184117:web:de9e4c588576d70285157c',
+      //   storageBucket: 'pictogram-app-5b056.firebasestorage.app',
+      //   apiKey: 'AIzaSyAP161YXgSXJ82hJJpp9N87lGs59hB4tEw',
+      //   authDomain: 'pictogram-app-5b056.firebaseapp.com',
+      //   messagingSenderId: '362708184117',
+      // })
     ),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore()), //provideFirebaseApp(() => initializeApp({"projectId":"pictogram-app-9d0e7","appId":"1:70891499467:web:45519582fcd6504702904e","storageBucket":"pictogram-app-9d0e7.firebasestorage.app","apiKey":"AIzaSyAYSn1sHEuddIooFrRltQVSPwegmYTuqgI","authDomain":"pictogram-app-9d0e7.firebaseapp.com","messagingSenderId":"70891499467"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()),
     // provideStorage(() => getStorage()),
   ],
 });

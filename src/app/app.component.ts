@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AngularFireModule } from '@angular/fire/compat';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -13,7 +14,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet, TranslateModule, CommonModule],
+  imports: [IonApp, IonRouterOutlet, TranslateModule, CommonModule, AngularFireModule],
 })
 export class AppComponent {
   constructor(public translate: TranslateService) {

@@ -27,10 +27,21 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore'
   ],
 })
 export class Tab1Page {
-  constructor(public route: Router) {
+  constructor(public route: Router, private firestore: Firestore) {
 
     addIcons({heart, add});
+    this.addTile({label: 'woda', isCustom: false});
 
+  }
+
+  async addTile(tile: {label: string; isCustom: boolean}) {
+    const tilesCollection = collection(this.firestore, 'tiles');
+    try {
+      const docRef = await addDoc(tilesCollection, tile);
+      console.log('Tile added with ID: ', docRef.id);
+    } catch (error){
+      console.log('Error adding tile: ', error);
+    }
   }
 
   wordTiles: Tile [] = [
