@@ -10,6 +10,7 @@ import { NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart, add } from 'ionicons/icons'
 import { Router } from '@angular/router';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore'
 
 @Component({
   selector: 'app-tab1',
