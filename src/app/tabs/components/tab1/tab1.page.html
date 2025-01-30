@@ -13,7 +13,7 @@
 
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col sizeXs="4" *ngFor="let tile of wordTiles">
         <ion-item color="{{tile.color}}" (click)="toggleTileSelection(tile)">
@@ -21,9 +21,19 @@
         </ion-item>
       </ion-col> 
     </ion-row>
+  </ion-grid> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeXs="4" *ngFor="let tile of tiles">
+        <ion-item>
+          {{tile.label}}
+        </ion-item>
+      </ion-col> 
+    </ion-row>
   </ion-grid>
 
-  <div class="grid">
+  <!-- <div class="grid">
     <div 
       *ngFor="let tile of wordTiles"
       [style.background-color]="tile.color"
@@ -32,7 +42,7 @@
     >
       {{ tile.label }}
     </div>
-  </div>
+  </div> -->
 
   <div class="button-container">
     <ion-button shape="round" (click)="navigateToAddTilePage()">

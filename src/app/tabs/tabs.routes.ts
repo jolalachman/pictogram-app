@@ -38,9 +38,10 @@ export const routes: Routes = [
     path: '',
     redirectTo: '/tabs/tab1',
     pathMatch: 'full',
-  },  {
+  },
+  {
     path: 'add-tile',
-    loadComponent: () => import('./components/add-tile/add-tile.page').then( m => m.AddTilePage)
+    loadComponent: () => import('./components/tab1/add-tile/add-tile.page').then( m => m.AddTilePage)
   },
 
 ];

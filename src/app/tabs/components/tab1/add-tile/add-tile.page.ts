@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonInput, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonInput, IonButton, IonBackButton } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-tile',
   templateUrl: './add-tile.page.html',
   styleUrls: ['./add-tile.page.scss'],
   standalone: true,
-  imports: [IonButton, IonInput, IonLabel, IonItem, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonBackButton, IonButton, IonInput, IonLabel, IonItem, IonList, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class AddTilePage implements OnInit {
 
   public formData: FormGroup = new FormGroup({});
   // private formData: FormGroup | undefined;
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit() {
     this.formData = new FormGroup({
@@ -25,6 +26,7 @@ export class AddTilePage implements OnInit {
 
   onSubmit() {
     console.log('Tile added:', this.formData.value);
+    // this.route.navigate(['/']);
   }
 
 }

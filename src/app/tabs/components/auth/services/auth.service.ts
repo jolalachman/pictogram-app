@@ -4,8 +4,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  user,
+  User,
 } from '@angular/fire/auth';
 import { AuthModel } from '../models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -46,5 +49,13 @@ export class AuthService {
   isAuthenticated() {
     // TODO: Add store so refresh wont affect the result
     return !!this.auth.currentUser;
+  }
+
+  async getCurrentUser(): Promise<User | null> {
+    return this.auth.currentUser;
+  }
+  // Observable (aktualizuje się automatycznie)
+  getCurrentUserObs(): Observable<User | null> {
+    return user(this.auth);
   }
 }
