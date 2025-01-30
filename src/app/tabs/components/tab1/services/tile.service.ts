@@ -25,6 +25,7 @@ export class TileService {
     } catch (error){
       console.log('Error adding tile: ', error);
     }
+    window.location.reload();
     // await addDoc()
   }
 

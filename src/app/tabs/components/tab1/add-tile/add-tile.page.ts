@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonInput, IonButton, IonBackButton } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { TileService } from '../services/tile.service';
 
 @Component({
   selector: 'app-add-tile',
@@ -16,7 +17,7 @@ export class AddTilePage implements OnInit {
   public formData: FormGroup = new FormGroup({});
   // private formData: FormGroup | undefined;
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private tileService: TileService) { }
 
   ngOnInit() {
     this.formData = new FormGroup({
@@ -27,6 +28,9 @@ export class AddTilePage implements OnInit {
   onSubmit() {
     console.log('Tile added:', this.formData.value);
     // this.route.navigate(['/']);
+    
+    this.tileService.addTile({label: this.formData.value.title, isCustom: false});
+    this.route.navigate(['']);
   }
 
 }
