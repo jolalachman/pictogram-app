@@ -8,4 +8,5 @@ export interface Tile {
     color?: string;
     label: string;
     isCustom: boolean;
+    iconName: string;
 }

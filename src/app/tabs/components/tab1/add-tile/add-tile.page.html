@@ -31,6 +31,14 @@
         <ion-label>Nazwa</ion-label>
         <ion-input formControlName="title"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>Ikona</ion-label>
+        <ion-select formControlName="icon">
+          <ion-select-option *ngFor="let icon of availableIcons" [value]="icon">
+            <fa-icon [icon]="['fas', icon]"></fa-icon> {{icon}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
     </ion-list>
 
     <ion-button type="submit" expand="block">Dodaj</ion-button>

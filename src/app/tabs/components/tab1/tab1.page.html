@@ -28,11 +28,15 @@
       <ion-col sizeXs="4" *ngFor="let tile of tiles">
         <ion-item>
           {{tile.label}}
+          <fa-icon [icon]="['fas', tile.iconName]"></fa-icon>
         </ion-item>
       </ion-col> 
     </ion-row>
   </ion-grid>
-
+  <div>
+    <fa-icon [icon]="['fas', 'graduation-cap']"></fa-icon>
+  </div>
+  
   <!-- <div class="grid">
     <div 
       *ngFor="let tile of wordTiles"

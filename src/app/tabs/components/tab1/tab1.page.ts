@@ -12,6 +12,7 @@ import { heart, add } from 'ionicons/icons'
 import { Router } from '@angular/router';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore'
 import { TileService } from './services/tile.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-tab1',
@@ -25,6 +26,7 @@ import { TileService } from './services/tile.service';
     IonContent,
     ExploreContainerComponent,
     NgFor,
+    FontAwesomeModule
   ],
 })
 export class Tab1Page implements OnInit{

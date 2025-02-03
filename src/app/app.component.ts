@@ -5,23 +5,29 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFireModule } from '@angular/fire/compat';
+import { FontAwesomeModule, FaIconLibrary  } from '@fortawesome/angular-fontawesome';
+// import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
+// library.add(fas);
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet, TranslateModule, CommonModule, AngularFireModule],
+  imports: [IonApp, IonRouterOutlet, TranslateModule, CommonModule, AngularFireModule, FontAwesomeModule],
 })
 export class AppComponent {
-  constructor(public translate: TranslateService) {
+  constructor(public translate: TranslateService, library: FaIconLibrary) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('pl');
 
     const browserLang = translate.getBrowserLang() ?? 'pl';
     translate.use(browserLang.match(/en|pl/) ? browserLang : 'pl');
+    library.addIconPacks(fas);
   }
 }

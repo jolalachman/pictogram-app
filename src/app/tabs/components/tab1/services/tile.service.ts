@@ -13,7 +13,7 @@ export class TileService {
 
   constructor(private firestore: Firestore, private authService: AuthService) { }
 
-  async addTile(tile: {label: string; isCustom: boolean}){
+  async addTile(tile: {label: string; isCustom: boolean, iconName: string}){
     const user = this.authService.getCurrentUser();
     if (!user) return;
     try {
@@ -45,6 +45,7 @@ export class TileService {
         return {
           label: data['label'] || 'Brak nazwy',
           isCustom: data['isCustom'] ?? false,
+          iconName: data['iconName'] || ''
         } as Tile
       });
 
