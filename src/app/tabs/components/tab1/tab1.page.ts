@@ -3,7 +3,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon, IonBackButton } from '@ionic/angular/standalone';
+  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
 import { NgFor } from '@angular/common';
@@ -19,7 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonBackButton, IonIcon, IonButton, IonLabel, IonItem, IonCol, IonGrid, IonRow, 
+  imports: [IonIcon, IonButton, IonLabel, IonItem, IonCol, IonGrid, IonRow, 
     IonHeader,
     IonToolbar,
     IonTitle,

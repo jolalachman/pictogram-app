@@ -14,34 +14,31 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- <div class="add-tile-form">
-    <label class="item item-input">
-      <span class = "input-label">Label 1</span>
-      <input type="text" placeholder="Wpisz nazwę nowej kafelki">
-    </label>
-
-    <label class="item item-input">
-      <input type="text" placeholder="Wybierz piktogram">
-    </label>
-  </div> -->
-
   <form [formGroup]="formData" (ngSubmit)="onSubmit()">
     <ion-list>
+
       <ion-item>
         <ion-label>Nazwa</ion-label>
         <ion-input formControlName="title"></ion-input>
       </ion-item>
+      
+      <!-- <ion-item>
+        <ion-label>Wyszukaj ikonę</ion-label>
+        <ion-input (ionInput)="filterIcons($event)" placeholder="Szukaj ikon..."></ion-input>
+      </ion-item> -->
+      
       <ion-item>
-        <ion-label>Ikona</ion-label>
+        <ion-label>Wybierz piktogram</ion-label>
+        <fa-icon [icon]="['fas', formData.get('icon')?.value || 'coffee']"></fa-icon>
         <ion-select formControlName="icon">
           <ion-select-option *ngFor="let icon of availableIcons" [value]="icon">
-            <fa-icon [icon]="['fas', icon]"></fa-icon> {{icon}}
+            {{ icon }}
           </ion-select-option>
         </ion-select>
       </ion-item>
-    </ion-list>
 
+    </ion-list>
     <ion-button type="submit" expand="block">Dodaj</ion-button>
   </form>
-
+  <fa-icon [icon]="['fas', 'coffee']"></fa-icon>
 </ion-content>
