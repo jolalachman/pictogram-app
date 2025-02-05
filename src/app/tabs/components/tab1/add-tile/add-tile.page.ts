@@ -29,6 +29,7 @@ export class AddTilePage implements OnInit {
   
   filteredIcons = [...this.allIcons]; // Kopia listy ikon do filtrowania
 
+  //TODO: add more availableIcons
   availableIcons = [
                     'coffee',
                     'heart', 
@@ -36,6 +37,7 @@ export class AddTilePage implements OnInit {
                     'apple-alt', 
                     'car'
                   ];
+                  
   constructor(private route: Router, private tileService: TileService, private fb: FormBuilder) {
     // this.formData = this.fb.group({
     //   title: [''],

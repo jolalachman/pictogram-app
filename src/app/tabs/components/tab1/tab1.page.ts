@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore'
 import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { APIService } from './services/api.service';
 
 @Component({
   selector: 'app-tab1',
@@ -34,9 +35,9 @@ export class Tab1Page implements OnInit{
   selectedTiles: Tile[] = [];
 
   constructor(
-    public route: Router, 
-    // private firestore: Firestore, 
-    private tileService: TileService
+    public route: Router,
+    private tileService: TileService,
+    private apiService: APIService
   ) {
     addIcons({heart, add});
   }
@@ -57,12 +58,24 @@ export class Tab1Page implements OnInit{
 
   generateSentence() {
     // TODO: get all selected tiles from this.tiles.isSelected and run it through sentence generator
-    
+    for(const tile of this.tiles){
+      if(tile.isSelected == true){
+        this.selectedTiles.push(tile);
+      }
+    }
+
+    const prompt = this.selectedTiles.map(tile => tile.label).join(' ');
+
     if (this.selectedTiles.length > 0) {
-      console.log('Generated sentence:', this.selectedTiles.map(tile => tile.label).join(' '));
+      console.log('Selectes tiles:', prompt);
     } else {
       console.log('No tiles selected');
     }
+    //
+    this.apiService.generateSentece(prompt).then(sentence => {
+      console.log('Generated sentence: ', sentence);
+    });
+    
   }
 
   navigateToAddTilePage(){

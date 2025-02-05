@@ -22,6 +22,7 @@ export const environment = {
   //   messagingSenderId: '362708184117',
   // },
   production: false,
+  openAPIKey: "",
 };
 
 /*
