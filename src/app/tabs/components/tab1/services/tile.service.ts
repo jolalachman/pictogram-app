@@ -52,6 +52,36 @@ export class TileService {
     // return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
+  async seedDatabase() {
+    const tiles = [
+      { label: 'Kawa', isCustom: false, iconName: 'coffee', color:'default', isSelected: false },
+      { label: 'Serce', isCustom: false, iconName: 'heart', color:'default', isSelected: false },
+      { label: 'Gwiazda', isCustom: false, iconName: 'star', color:'default', isSelected: false },
+      { label: 'Samochód', isCustom: false, iconName: 'car', color:'default', isSelected: false },
+      { label: 'Dom', isCustom: false, iconName: 'home', color:'default', isSelected: false },
+      { label: 'Osoba', isCustom: false, iconName: 'user', color:'default', isSelected: false },
+      { label: 'Komputer', isCustom: false, iconName: 'laptop', color:'default', isSelected: false },
+      { label: 'Książka', isCustom: false, iconName: 'book-open', color:'default', isSelected: false },
+      { label: 'Uśmiech', isCustom: false, iconName: 'smile', color:'default', isSelected: false },
+      { label: 'Pieniądze', isCustom: false, iconName: 'money-bill', color:'default', isSelected: false },
+      { label: 'Telefon', isCustom: false, iconName: 'phone', color:'default', isSelected: false },
+      { label: 'Samolot', isCustom: false, iconName: 'plane', color:'default', isSelected: false },
+      { label: 'Tort', isCustom: false, iconName: 'birthday-cake', color:'default', isSelected: false },
+      { label: 'Praca', isCustom: false, iconName: 'briefcase', color:'default', isSelected: false },
+      { label: 'Muzyka', isCustom: false, iconName: 'music', color:'default', isSelected: false },
+    ];
+    try {
+      for(const tile of tiles) {
+        const docRef = await addDoc(this.tilesCollection, tile);
+        console.log('Tile added with ID: ', docRef.id);
+      }
+      console.log('Database seeding completed.');
+    } catch (error){
+      console.log('Error seeding database: ', error);
+    }
+    // window.location.reload();
+  }
+
   // async addTile(tile: { label: string; icon: string }) {
   //   const user = this.authService.getCurrentUser(); // Pobierz aktualnego użytkownika
   //   if (!user) return;

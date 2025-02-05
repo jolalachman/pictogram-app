@@ -31,58 +31,38 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 })
 export class Tab1Page implements OnInit{
   tiles: Tile[] = [];
+  selectedTiles: Tile[] = [];
 
   constructor(
     public route: Router, 
-    private firestore: Firestore, 
-    private tileService: TileService) {
-
+    // private firestore: Firestore, 
+    private tileService: TileService
+  ) {
     addIcons({heart, add});
-    // this.addTile({label: 'woda', isCustom: false});
-
   }
 
   async ngOnInit(){
-
+    // this.tileService.seedDatabase();
     this.tiles = await this.tileService.getUserTiles();
   }
 
-  // async addTile(tile: {label: string; isCustom: boolean}) {
-  //   const tilesCollection = collection(this.firestore, 'tiles');
-  //   try {
-  //     const docRef = await addDoc(tilesCollection, tile);
-  //     console.log('Tile added with ID: ', docRef.id);
-  //   } catch (error){
-  //     console.log('Error adding tile: ', error);
-  //   }
-  // }
-
-  // public async addTile(tile: {label1: string; isCustom1: boolean}) {
-  //   this.wordTiles.push({id: '10', label: tile.label1, isCustom: tile.isCustom1, isSelected: false, color: 'default'});
-    
-  // }
-  
-
-  wordTiles: Tile [] = [
-    // {id: '1', label: 'Mama', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '2', label: 'Kot', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '3', label: 'Jedzenie', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '4', label: 'Picie', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '5', label: 'Pies', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '6', label: 'Ciepło', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '7', label: 'Zimno', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '8', label: 'Ja', isCustom: false, isSelected: false, color: 'default'},
-    // {id: '9', label: 'Ty', isCustom: false, isSelected: false, color: 'default'},
-  ];
-
   toggleTileSelection(tile: Tile): void {
-    // tile.isSelected = !tile.isSelected;
-    // tile.color = tile.isSelected ? "success" : "default";
-
+    tile.isSelected = !tile.isSelected;
+    tile.color = tile.isSelected ? "success" : "default";
   }
 
-  addNewTile(){
+  // isSelected(tile: Tile): boolean {
+  //   return this.selectedTiles.some(t => t.label = tile.label);
+  // }
 
+  generateSentence() {
+    // TODO: get all selected tiles from this.tiles.isSelected and run it through sentence generator
+    
+    if (this.selectedTiles.length > 0) {
+      console.log('Generated sentence:', this.selectedTiles.map(tile => tile.label).join(' '));
+    } else {
+      console.log('No tiles selected');
+    }
   }
 
   navigateToAddTilePage(){

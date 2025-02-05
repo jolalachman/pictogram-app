@@ -3,9 +3,9 @@ export interface Tile {
     // label: string;
     // iconUrl?: string;
     // isCustom: boolean;
-    // isSelected: boolean;
+    isSelected: boolean;
     // category?: string;
-    color?: string;
+    color: string;
     label: string;
     isCustom: boolean;
     iconName: string;

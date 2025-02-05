@@ -11,43 +11,21 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
-
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col sizeXs="4" *ngFor="let tile of wordTiles">
-        <ion-item color="{{tile.color}}" (click)="toggleTileSelection(tile)">
-          {{tile.label}}
-        </ion-item>
-      </ion-col> 
-    </ion-row>
-  </ion-grid> -->
-
   <ion-grid>
     <ion-row>
       <ion-col sizeXs="4" *ngFor="let tile of tiles">
-        <ion-item>
-          {{tile.label}}
+        <ion-item 
+          color="{{tile.color}}" 
+          (click)="toggleTileSelection(tile)">
           <fa-icon [icon]="['fas', tile.iconName]"></fa-icon>
+          <ion-label>{{ tile.label }}</ion-label>
         </ion-item>
       </ion-col> 
     </ion-row>
   </ion-grid>
-  <div>
-    <fa-icon [icon]="['fas', 'graduation-cap']"></fa-icon>
-  </div>
   
-  <!-- <div class="grid">
-    <div 
-      *ngFor="let tile of wordTiles"
-      [style.background-color]="tile.color"
-      (click)="toggleTileSelection(tile)"
-      class="tile"
-    >
-      {{ tile.label }}
-    </div>
-  </div> -->
-
+  <ion-button shape="round" (click)="generateSentence()">Generuj zdanie</ion-button>
+  
   <div class="button-container">
     <ion-button shape="round" (click)="navigateToAddTilePage()">
       <ion-icon slot="icon-only" name="add"></ion-icon>
@@ -58,10 +36,3 @@
 
 
 </ion-content>
-
-<!-- <ion-item>
-  <ion-label>
-    <h2>H2 Heading</h2>
-    <p>Paragraph</p>
-  </ion-label>
-</ion-item> -->
