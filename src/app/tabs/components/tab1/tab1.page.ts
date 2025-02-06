@@ -16,6 +16,7 @@ import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { APIService } from './services/api.service';
 import { AuthService } from '../auth/services';
+import { HistoryService } from './services/history.service';
 
 @Component({
   selector: 'app-tab1',
@@ -43,7 +44,8 @@ export class Tab1Page implements OnInit{
     public route: Router,
     private tileService: TileService,
     private apiService: APIService,
-    private authService: AuthService
+    private authService: AuthService,
+    private historyService: HistoryService
   ) {
     addIcons({heart, add});
   }
@@ -80,12 +82,15 @@ export class Tab1Page implements OnInit{
     } else {
       console.log('No tiles selected');
     }
-    // TODO: Display generated sentence
+    
     this.apiService.generateSentece(prompt).then(sentence => {
       this.generatedSentence = sentence;
+      this.historyService.saveHistory(prompt, sentence || '');
       this.showPopup = true;
     });
     
+    this.selectedTiles = [];
+
   }
 
   navigateToAddTilePage(){

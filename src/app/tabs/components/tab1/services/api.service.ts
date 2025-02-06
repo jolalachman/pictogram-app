@@ -38,7 +38,7 @@ export class APIService {
       model: "gpt-4o-mini",
       store: true,
       messages: [
-        {"role": "user", "content": `Stwórz zdanie z podanych wyrazów: ${inputWords}.`},
+        {"role": "user", "content": `Stwórz zdanie z podanych wyrazów: ${inputWords}. Wygenerowane zdanie ma za zadanie ułatwić komunikację osobom z trudnościami (np. nieumiejącym mówić).`},
       ],
     });
     // return completion.choices[0].message.content;
