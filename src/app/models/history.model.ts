@@ -1,6 +1,6 @@
 import { Tile } from "./tile.model";
 
-export interface History {
+export interface HistoryModel {
     userId: string,
     selectedTiles: string,
     generatedSentence: string,

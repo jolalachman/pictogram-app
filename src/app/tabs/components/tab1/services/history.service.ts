@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, query, where, getDocs } from '@angular/fire/firestore';
-import { History } from 'src/app/models/history.model';
+import { HistoryModel } from 'src/app/models/history.model';
 import { AuthService } from '../../auth/services';
 import { Tile } from 'src/app/models/tile.model';
+import { orderBy } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class HistoryService {
   constructor(private firestore: Firestore, private authService: AuthService) {}
 
   async saveHistory(selectedTiles: string, generatedSentence: string) {
-
+    console.log(selectedTiles);
     this.authService.getCurrentUser().subscribe( async user => {
       if(!user) {
         console.log("Nie można zapisać historii, użytkownik niezalogowany");
@@ -40,18 +41,16 @@ export class HistoryService {
 
   }
 
-  async getUserHistory(userId: string): Promise<History[]> {
-    // const q = query(this.historyCollection, where('userId', '==', userId));
-    // const querySnapshot = await getDocs(q);
-    
-    // return querySnapshot.docs.map(doc => doc.data() as History);
+  async getUserHistory(): Promise<HistoryModel[]> {
 
     return new Promise((resolve) => {
       this.authService.getCurrentUser().subscribe(async user => {
         try{
           let q;
           if (user) {
+            // q = query(this.historyCollection, where('userId', '==', user.uid), orderBy('creationDate', 'desc'));
             q = query(this.historyCollection, where('userId', '==', user.uid));
+
           } else {
             console.log('Brak zalogowanego użytkownika, nie można pobrać historii');
             return;
@@ -63,10 +62,11 @@ export class HistoryService {
             .map(doc => {
               const data = doc.data();
               return {
+                userId: data['userId'],
                 selectedTiles: data['selectedTiles'] || '',
                 generatedSentence: data['generatedSentence'],
                 creationDate: data['creationDate']
-              } as History
+              } as HistoryModel
             });
 
             resolve(history);

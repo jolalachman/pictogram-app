@@ -11,7 +11,7 @@ import { NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart, add } from 'ionicons/icons'
 import { Router } from '@angular/router';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore'
+// import { Firestore, collection, addDoc } from '@angular/fire/firestore'
 import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { APIService } from './services/api.service';
@@ -85,11 +85,15 @@ export class Tab1Page implements OnInit{
     
     this.apiService.generateSentece(prompt).then(sentence => {
       this.generatedSentence = sentence;
-      this.historyService.saveHistory(prompt, sentence || '');
-      this.showPopup = true;
+      const iconNames = this.selectedTiles.map(tile => tile.iconName).join(' ');
+      console.log(this.selectedTiles);
+
+      this.historyService.saveHistory(iconNames, sentence || '').then(() => {
+        this.selectedTiles = [];
+        this.showPopup = true;
+      });
     });
-    
-    this.selectedTiles = [];
+
 
   }
 
