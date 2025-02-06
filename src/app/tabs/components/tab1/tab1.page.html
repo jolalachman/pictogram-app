@@ -4,12 +4,21 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-alert
+  [isOpen]="showPopup"
+  [header]="'Wygenerowane zdanie'"
+  [message]="generatedSentence"
+  [buttons]="['OK']"
+  (didDismiss)="showPopup = false"
+></ion-alert>
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar>
   </ion-header>
+
 
   <ion-grid>
     <ion-row>
@@ -24,14 +33,14 @@
     </ion-row>
   </ion-grid>
   
-  <ion-button shape="round" (click)="generateSentence()">Generuj zdanie</ion-button>
+  <!-- <ion-button shape="round" (click)="generateSentence()">Generuj zdanie</ion-button> -->
   
   <div class="button-container">
     <ion-button shape="round" (click)="navigateToAddTilePage()">
       <ion-icon slot="icon-only" name="add"></ion-icon>
     </ion-button>
 
-    <ion-button shape="round">Generuj</ion-button>
+    <ion-button shape="round" (click)="generateSentence()">Generuj zdanie</ion-button>
   </div>
 
 

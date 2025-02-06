@@ -3,7 +3,8 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon } from '@ionic/angular/standalone';
+  IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon,
+  IonAlert } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
 import { NgFor } from '@angular/common';
@@ -28,12 +29,15 @@ import { AuthService } from '../auth/services';
     IonContent,
     ExploreContainerComponent,
     NgFor,
-    FontAwesomeModule
+    FontAwesomeModule,
+    IonAlert
   ],
 })
 export class Tab1Page implements OnInit{
   tiles: Tile[] = [];
   selectedTiles: Tile[] = [];
+  generatedSentence: string | null = '';
+  showPopup: boolean = false;
 
   constructor(
     public route: Router,
@@ -78,7 +82,8 @@ export class Tab1Page implements OnInit{
     }
     // TODO: Display generated sentence
     this.apiService.generateSentece(prompt).then(sentence => {
-      // console.log('Generated sentence: ', sentence);
+      this.generatedSentence = sentence;
+      this.showPopup = true;
     });
     
   }
