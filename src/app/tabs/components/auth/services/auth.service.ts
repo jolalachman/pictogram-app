@@ -7,7 +7,6 @@ import {
   user,
   User, 
 } from '@angular/fire/auth';
-import { getAuth } from 'firebase/auth';
 import { AuthModel } from '../models';
 import { Observable } from 'rxjs';
 
@@ -40,12 +39,6 @@ export class AuthService {
         authModel.email ?? '',
         authModel.password ?? ''
       );
-      console.log("user", user);//zwraca obiekt z userem
-
-      // const auth = getAuth();
-      const user1 = this.auth.currentUser;
-
-      console.log("user1", user1);//zwraca null
       return user;
     } catch (e) {
       return null;
@@ -65,31 +58,5 @@ export class AuthService {
   getCurrentUser(): Observable<User | null> {
     return this.user$;
   }
-  // async getCurrentUser(): Promise<User | null> {
-  //   // console.log(this.auth.currentUser);
-  //   // const auth = getAuth();
-  //   // const user = auth.currentUser;
-  //   // console.log(user);
-
-  //   // if (user !== null) {
-  //   //   // The user object has basic properties such as display name, email, etc.
-  //   //   const displayName = user.displayName;
-  //   //   const email = user.email;
-  //   //   const photoURL = user.photoURL;
-  //   //   const emailVerified = user.emailVerified;
-    
-  //   //   // The user's ID, unique to the Firebase project. Do NOT use
-  //   //   // this value to authenticate with your backend server, if
-  //   //   // you have one. Use User.getToken() instead.
-  //   //   const uid = user.uid;
-  //   //   console.log(user);
-  //   // }
-
-  //   return this.auth.currentUser;
-  // }
-  // Observable (aktualizuje się automatycznie)
-  getCurrentUserObs(): Observable<User | null> {
-    // console.log(this.auth);
-    return user(this.auth);
-  }
+  
 }

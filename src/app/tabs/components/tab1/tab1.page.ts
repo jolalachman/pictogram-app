@@ -14,6 +14,7 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore'
 import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { APIService } from './services/api.service';
+import { AuthService } from '../auth/services';
 
 @Component({
   selector: 'app-tab1',
@@ -37,13 +38,21 @@ export class Tab1Page implements OnInit{
   constructor(
     public route: Router,
     private tileService: TileService,
-    private apiService: APIService
+    private apiService: APIService,
+    private authService: AuthService
   ) {
     addIcons({heart, add});
   }
 
   async ngOnInit(){
     // this.tileService.seedDatabase();
+    this.authService.getCurrentUser().subscribe(user => {
+      console.log("Zalogowany użytkownik:", user?.uid || "Brak");
+      this.loadTiles(); // Load tiles after every logged user change
+    });
+  }
+
+  async loadTiles() {
     this.tiles = await this.tileService.getUserTiles();
   }
 
@@ -52,12 +61,8 @@ export class Tab1Page implements OnInit{
     tile.color = tile.isSelected ? "success" : "default";
   }
 
-  // isSelected(tile: Tile): boolean {
-  //   return this.selectedTiles.some(t => t.label = tile.label);
-  // }
 
   generateSentence() {
-    // TODO: get all selected tiles from this.tiles.isSelected and run it through sentence generator
     for(const tile of this.tiles){
       if(tile.isSelected == true){
         this.selectedTiles.push(tile);
@@ -71,7 +76,7 @@ export class Tab1Page implements OnInit{
     } else {
       console.log('No tiles selected');
     }
-    //
+    // TODO: Display generated sentence
     this.apiService.generateSentece(prompt).then(sentence => {
       // console.log('Generated sentence: ', sentence);
     });
