@@ -41,14 +41,6 @@ export class Tab2Page implements OnInit {
     });
   }
 
-  // async ngOnInit(){
-  //   // this.tileService.seedDatabase();
-  //   this.authService.getCurrentUser().subscribe(user => {
-  //     console.log("Zalogowany użytkownik:", user?.uid || "Brak");
-  //     this.loadTiles(); // Load tiles after every logged user change
-  //   });
-  // }
-
   async loadHistory() {
     this.historyList = await this.historyService.getUserHistory();
   }

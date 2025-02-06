@@ -53,6 +53,7 @@ export class HistoryService {
 
           } else {
             console.log('Brak zalogowanego użytkownika, nie można pobrać historii');
+            resolve([]);
             return;
           }
 
@@ -72,6 +73,7 @@ export class HistoryService {
             resolve(history);
         } catch (error){
           console.error("Błąd pobierania historii:", error);
+          resolve([]);
           // reject(error);
         }
         });
