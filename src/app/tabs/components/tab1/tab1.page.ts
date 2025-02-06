@@ -73,7 +73,7 @@ export class Tab1Page implements OnInit{
     }
     //
     this.apiService.generateSentece(prompt).then(sentence => {
-      console.log('Generated sentence: ', sentence);
+      // console.log('Generated sentence: ', sentence);
     });
     
   }

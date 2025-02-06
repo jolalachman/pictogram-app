@@ -6,4 +6,5 @@ export interface Tile {
     label: string;
     isCustom: boolean;
     iconName: string;
+    userId: string;
 }
