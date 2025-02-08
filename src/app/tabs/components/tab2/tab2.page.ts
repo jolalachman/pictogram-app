@@ -37,7 +37,7 @@ export class Tab2Page implements OnInit {
 
   async ngOnInit() {
     this.authService.getCurrentUser().subscribe(user => {
-      this.loadHistory(); // Load tiles after every logged user change
+      this.loadHistory();
     });
   }
 

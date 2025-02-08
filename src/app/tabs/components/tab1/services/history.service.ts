@@ -9,12 +9,11 @@ import { orderBy } from 'firebase/firestore';
   providedIn: 'root'
 })
 export class HistoryService {
-  private historyCollection = collection(this.firestore, 'history'); // Kolekcja w Firebase
+  private historyCollection = collection(this.firestore, 'history');
 
   constructor(private firestore: Firestore, private authService: AuthService) {}
 
   async saveHistory(selectedTiles: string, generatedSentence: string) {
-    console.log(selectedTiles);
     this.authService.getCurrentUser().subscribe( async user => {
       if(!user) {
         console.log("Nie można zapisać historii, użytkownik niezalogowany");

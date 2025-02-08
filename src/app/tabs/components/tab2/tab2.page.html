@@ -9,22 +9,11 @@
     <ion-item *ngFor="let history of historyList">
       <ion-label>
         <div class="icons">
-          <fa-icon *ngFor="let icon of history.selectedTiles.split(' ')" [icon]="['fas', icon]"></fa-icon>
+          <ion-label *ngFor="let icon of history.selectedTiles.split(' ')">{{icon}}</ion-label>
         </div>
         <p class="sentence">{{ history.generatedSentence }}</p>
-        <!-- <p class="date">{{ history.creationDate | date:'short' }}</p> -->
       </ion-label>
     </ion-item>
 
   </ion-list>
 </ion-content>
-
-<!-- <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-</ion-content> -->

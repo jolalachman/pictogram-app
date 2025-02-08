@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import OpenAI from 'openai';
 import { environment } from 'src/environments/environment';
 
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class APIService {
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   
   async generateSentece(inputWords: string): Promise<string | null> {
@@ -22,7 +23,7 @@ export class APIService {
       model: "gpt-4o-mini",
       store: true,
       messages: [
-        {"role": "user", "content": `Stwórz zdanie z podanych wyrazów: ${inputWords}. Wygenerowane zdanie ma za zadanie ułatwić komunikację osobom z trudnościami (np. nieumiejącym mówić).`},
+        {"role": "user", "content": `Stwórz zdanie z podanych wyrazów: ${inputWords} w języku ${this.translate.currentLang}. Wygenerowane zdanie ma za zadanie ułatwić komunikację osobom z trudnościami (np. nieumiejącym mówić).`},
       ],
     });
     

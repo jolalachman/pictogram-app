@@ -1,10 +1,8 @@
 export interface Tile {
-    // id: string;
     isSelected: boolean;
-    // category?: string;
-    color: string;
+    category: string;
     label: string;
     isCustom: boolean;
-    iconName: string;
+    icon: string;
     userId: string;
 }

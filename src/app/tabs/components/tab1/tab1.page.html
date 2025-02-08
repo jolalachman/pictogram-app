@@ -19,27 +19,77 @@
     </ion-toolbar>
   </ion-header>
 
+  @if(tiles$ | async; as tiles) {
+    <ion-grid>
+      <ion-row *ngIf="getCategory(tiles, 'nouns')">
+        <ion-col size="12">
+          <h3>Rzeczowniki</h3>
+        </ion-col>
+        <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'nouns'">
+          <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
+            <ion-label>{{tile.icon}}</ion-label>
+            <ion-label>{{ tile.label | translate }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    
+      <ion-row *ngIf="getCategory(tiles, 'verbs')">
+        <ion-col size="12">
+          <h3>Czasowniki</h3>
+        </ion-col>
+        <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'verbs'">
+          <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
+            <ion-label>{{tile.icon}}</ion-label>
+            <ion-label>{{ tile.label | translate }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    
+      <ion-row *ngIf="getCategory(tiles, 'adjectives')">
+        <ion-col size="12">
+          <h3>Przymiotniki</h3>
+        </ion-col>
+        <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'adjectives'">
+          <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
+            <ion-label>{{tile.icon}}</ion-label>
+            <ion-label>{{ tile.label | translate }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col sizeXs="4" *ngFor="let tile of tiles">
-        <ion-item 
-          color="{{tile.color}}" 
-          (click)="toggleTileSelection(tile)">
-          <fa-icon [icon]="['fas', tile.iconName]"></fa-icon>
-          <ion-label>{{ tile.label }}</ion-label>
-        </ion-item>
-      </ion-col> 
-    </ion-row>
-  </ion-grid>
-  
+      <ion-row *ngIf="getCategory(tiles, 'questions')">
+        <ion-col size="12">
+          <h3>Pytania</h3>
+        </ion-col>
+        <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'questions'">
+          <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
+            <ion-label>{{tile.icon}}</ion-label>
+            <ion-label>{{ tile.label | translate }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="getCategory(tiles, 'expressions')">
+        <ion-col size="12">
+          <h3>Wyrażenia</h3>
+        </ion-col>
+        <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'expressions'">
+          <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
+            <ion-label>{{tile.icon}}</ion-label>
+            <ion-label>{{ tile.label | translate }}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    
+    </ion-grid>
+    
   <div class="button-container">
     <ion-button shape="round" (click)="navigateToAddTilePage()">
       <ion-icon slot="icon-only" name="add"></ion-icon>
     </ion-button>
 
-    <ion-button shape="round" (click)="generateSentence()">Generuj zdanie</ion-button>
+    <ion-button shape="round" (click)="generateSentence(tiles)">Generuj zdanie</ion-button>
   </div>
-
+}
 
 </ion-content>

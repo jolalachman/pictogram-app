@@ -7,16 +7,17 @@ import {
   IonAlert } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { heart, add } from 'ionicons/icons'
 import { Router } from '@angular/router';
-// import { Firestore, collection, addDoc } from '@angular/fire/firestore'
 import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { APIService } from './services/api.service';
 import { AuthService } from '../auth/services';
 import { HistoryService } from './services/history.service';
+import { Observable } from 'rxjs';
+import { APIService } from './services/api.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tab1',
@@ -31,11 +32,13 @@ import { HistoryService } from './services/history.service';
     ExploreContainerComponent,
     NgFor,
     FontAwesomeModule,
-    IonAlert
+    IonAlert,
+    CommonModule,
+    TranslateModule
   ],
 })
 export class Tab1Page implements OnInit{
-  tiles: Tile[] = [];
+  tiles$: Observable<Tile[]> = this.tileService.getUserTiles();
   selectedTiles: Tile[] = [];
   generatedSentence: string | null = '';
   showPopup: boolean = false;
@@ -43,33 +46,26 @@ export class Tab1Page implements OnInit{
   constructor(
     public route: Router,
     private tileService: TileService,
-    private apiService: APIService,
     private authService: AuthService,
+    private apiService: APIService,
     private historyService: HistoryService
   ) {
     addIcons({heart, add});
   }
 
   async ngOnInit(){
-    // this.tileService.seedDatabase();
     this.authService.getCurrentUser().subscribe(user => {
       console.log("Zalogowany użytkownik:", user?.uid || "Brak");
-      this.loadTiles(); // Load tiles after every logged user change
     });
-  }
-
-  async loadTiles() {
-    this.tiles = await this.tileService.getUserTiles();
   }
 
   toggleTileSelection(tile: Tile): void {
     tile.isSelected = !tile.isSelected;
-    tile.color = tile.isSelected ? "success" : "default";
   }
 
 
-  generateSentence() {
-    for(const tile of this.tiles){
+  generateSentence(tiles: Tile[]) {
+    for(const tile of tiles){
       if(tile.isSelected == true){
         this.selectedTiles.push(tile);
       }
@@ -85,8 +81,7 @@ export class Tab1Page implements OnInit{
     
     this.apiService.generateSentece(prompt).then(sentence => {
       this.generatedSentence = sentence;
-      const iconNames = this.selectedTiles.map(tile => tile.iconName).join(' ');
-      console.log(this.selectedTiles);
+      const iconNames = this.selectedTiles.map(tile => tile.icon).join(' ');
 
       this.historyService.saveHistory(iconNames, sentence || '').then(() => {
         this.selectedTiles = [];
@@ -94,11 +89,14 @@ export class Tab1Page implements OnInit{
       });
     });
 
-
+    tiles.map(tile => tile.isSelected = false);
   }
 
   navigateToAddTilePage(){
     this.route.navigate(['/add-tile']);
   }
 
+  getCategory(tiles: Tile[], category: string) {
+    return tiles.some(tile => tile.category === category)
+  }
 }
