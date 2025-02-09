@@ -18,6 +18,7 @@ import { HistoryService } from './services/history.service';
 import { Observable } from 'rxjs';
 import { APIService } from './services/api.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
 
 @Component({
   selector: 'app-tab1',
@@ -48,7 +49,7 @@ export class Tab1Page implements OnInit{
     private tileService: TileService,
     private authService: AuthService,
     private apiService: APIService,
-    private historyService: HistoryService
+    private historyService: HistoryService,
   ) {
     addIcons({heart, add});
   }
@@ -85,12 +86,24 @@ export class Tab1Page implements OnInit{
 
       this.historyService.saveHistory(iconNames, sentence || '').then(() => {
         this.selectedTiles = [];
-        this.showPopup = true;
+        this.speak(sentence);
       });
     });
 
     tiles.map(tile => tile.isSelected = false);
   }
+
+ speak = async (sentence: string| null) => {
+    await TextToSpeech.speak({
+      text: sentence ?? '',
+      lang: 'pl-PL',
+      rate: 1.0,
+      pitch: 1.0,
+      volume: 1.0,
+      category: 'ambient',
+      queueStrategy: 1
+    });
+  };
 
   navigateToAddTilePage(){
     this.route.navigate(['/add-tile']);
