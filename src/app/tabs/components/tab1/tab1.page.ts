@@ -4,6 +4,8 @@ import {
   IonToolbar,
   IonTitle,
   IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon,
+  IonFab,
+  IonFabButton,
   IonAlert } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
@@ -30,6 +32,8 @@ import { TextToSpeech } from '@capacitor-community/text-to-speech';
     IonToolbar,
     IonTitle,
     IonContent,
+    IonFab,
+    IonFabButton,
     ExploreContainerComponent,
     NgFor,
     FontAwesomeModule,

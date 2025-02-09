@@ -1,29 +1,32 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Zbuduj swoje zdanie </ion-title>
+    <ion-title> {{ 'SENTENCE.CREATE_SENTENCE' | translate}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-alert
+<!-- <ion-alert
   [isOpen]="showPopup"
   [header]="'Wygenerowane zdanie'"
   [message]="generatedSentence"
   [buttons]="['OK']"
   (didDismiss)="showPopup = false"
-></ion-alert>
+></ion-alert> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" fixed-slot-placement="before">
 
   @if(tiles$ | async; as tiles) {
-    <ion-grid>
+    <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+      <div class="button-container">
+        <ion-button shape="round" (click)="generateSentence(tiles)">{{ 'SENTENCE.GENERATE_SENTENCE' | translate}}</ion-button>
+        <ion-button shape="round" (click)="navigateToAddTilePage()">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-fab>
+    <ion-grid class="grid">
       <ion-row *ngIf="getCategory(tiles, 'nouns')">
         <ion-col size="12">
-          <h3>Rzeczowniki</h3>
+          <h3>{{ 'SENTENCE.NOUNS' | translate}}</h3>
         </ion-col>
         <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'nouns'">
           <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
@@ -35,7 +38,7 @@
     
       <ion-row *ngIf="getCategory(tiles, 'verbs')">
         <ion-col size="12">
-          <h3>Czasowniki</h3>
+          <h3>{{ 'SENTENCE.VERBS' | translate}}</h3>
         </ion-col>
         <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'verbs'">
           <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
@@ -47,7 +50,7 @@
     
       <ion-row *ngIf="getCategory(tiles, 'adjectives')">
         <ion-col size="12">
-          <h3>Przymiotniki</h3>
+          <h3>{{ 'SENTENCE.ADJECTIVES' | translate}}</h3>
         </ion-col>
         <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'adjectives'">
           <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
@@ -59,7 +62,7 @@
 
       <ion-row *ngIf="getCategory(tiles, 'questions')">
         <ion-col size="12">
-          <h3>Pytania</h3>
+          <h3>{{ 'SENTENCE.QUESTIONS' | translate}}</h3>
         </ion-col>
         <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'questions'">
           <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
@@ -71,7 +74,7 @@
 
       <ion-row *ngIf="getCategory(tiles, 'expressions')">
         <ion-col size="12">
-          <h3>Wyrażenia</h3>
+          <h3>{{ 'SENTENCE.EXPRESSIONS' | translate}}</h3>
         </ion-col>
         <ion-col sizeXs="4" *ngFor="let tile of tiles" [hidden]="tile.category !== 'expressions'">
           <ion-item color="{{tile.isSelected ? 'success' : 'default'}}" (click)="toggleTileSelection(tile)">
@@ -82,14 +85,6 @@
       </ion-row>
     
     </ion-grid>
-    
-  <div class="button-container">
-    <ion-button shape="round" (click)="navigateToAddTilePage()">
-      <ion-icon slot="icon-only" name="add"></ion-icon>
-    </ion-button>
-
-    <ion-button shape="round" (click)="generateSentence(tiles)">Generuj zdanie</ion-button>
-  </div>
 }
 
 </ion-content>

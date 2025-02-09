@@ -13,6 +13,18 @@
     "CREATE_ACCOUNT": "Create account",
     "ALREADY_HAVE_ACCOUNT": "Have account already?"
   },
+  "SENTENCE" : {
+    "CREATE_SENTENCE": "Create sentence",
+    "GENERATE_SENTENCE": "Generate sentence",
+    "NOUNS": "Nouns",
+    "VERBS": "Verbs",
+    "ADJECTIVES": "Adjectives",
+    "QUESTIONS": "Questions",
+    "EXPRESSIONS": "Expressions"
+  },
+  "HISTORY": {
+    "HISTORY": "History"
+  },
   "Person": "Person",
   "House": "House",
   "Food": "Food",

@@ -13,6 +13,18 @@
     "CREATE_ACCOUNT": "Stwórz konto",
     "ALREADY_HAVE_ACCOUNT": "Posiadasz już konto?"
   },
+  "SENTENCE" : {
+    "CREATE_SENTENCE": "Stwórz zdanie",
+    "GENERATE_SENTENCE": "Generuj zdanie",
+    "NOUNS": "Rzeczowniki",
+    "VERBS": "Czasowniki",
+    "ADJECTIVES": "Przymiotniki",
+    "QUESTIONS": "Pytania",
+    "EXPRESSIONS": "Wyrażenia"
+  },
+  "HISTORY": {
+    "HISTORY": "Historia"
+  },
   "Person": "Osoba",
   "House": "Dom",
   "Food": "Jedzenie",

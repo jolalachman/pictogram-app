@@ -8,7 +8,7 @@ import {
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
-import { triangle, ellipse, personCircleOutline } from 'ionicons/icons';
+import { triangle, ellipse, personCircleOutline, chatbubbleEllipsesOutline, reloadOutline } from 'ionicons/icons';
 import { AuthService } from './components/auth/services';
 
 @Component({
@@ -29,7 +29,7 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private authService: AuthService) {
-    addIcons({ triangle, ellipse, personCircleOutline });
+    addIcons({chatbubbleEllipsesOutline,reloadOutline,personCircleOutline});
   }
 
   public isAuthenticated(): boolean {
