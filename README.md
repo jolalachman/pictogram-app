@@ -2,7 +2,7 @@
 
 ## Opis
 
-Aplikacja mobilna stworzona w technologii **Ionic** i **Angular**, której celem jest umożliwienie użytkownikom tworzenia wypowiedzi przy użyciu sekwencji piktogramów. Aplikacja została zaprojektowana z myślą o osobach, które mają trudności w komunikacji werbalnej, w tym osoby z autyzmem, afazją, a także dzieci uczące się podstawowych słów i zwrotów.
+Aplikacja mobilna stworzona w technologii **Ionic** i **Angular** uruchamialna na platformie **Android**, której celem jest umożliwienie użytkownikom tworzenia wypowiedzi przy użyciu sekwencji piktogramów. Aplikacja została zaprojektowana z myślą o osobach, które mają trudności w komunikacji werbalnej, w tym osoby z autyzmem, afazją, a także dzieci uczące się podstawowych słów i zwrotów.
 
 Użytkownicy mogą wybierać piktogramy z dostępnej biblioteki, łączyć je w sekwencje, tworząc w ten sposób proste komunikaty. System umożliwia zapisywanie stworzonych wypowiedzi, a także ich późniejsze odtwarzanie.
 
