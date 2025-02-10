@@ -1,0 +1,17 @@
+
+  @if(selectedTiles$ | async; as selectedTiles) {
+    <div class="generated-sentence-container" *ngIf="selectedTiles.length > 0">
+      <h3>{{'SENTENCE.GENERATED_SENTENCE' | translate}}</h3>
+      <div class="align-items">
+        <span class="icon" *ngFor="let tile of selectedTiles">
+          {{tile.icon}}
+        </span>
+      </div>
+      <div class="align-items">
+        <span *ngFor="let tile of selectedTiles">
+          {{tile.label}}
+        </span>
+      </div>
+    </div>
+  }
+

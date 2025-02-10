@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
   signOut,
   user,
   User, 
 } from '@angular/fire/auth';
-import { AuthModel } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,29 +18,16 @@ export class AuthService {
     this.user$ = user(this.auth);
   }
 
-  async register(authModel: AuthModel) {
-    try {
-      const user = createUserWithEmailAndPassword(
-        this.auth,
-        authModel.email ?? '',
-        authModel.password ?? ''
-      );
-      return user;
-    } catch (e) {
-      return null;
-    }
-  }
 
-  async login(authModel: AuthModel) {
+  async googleLogin() {
     try {
-      const user = signInWithEmailAndPassword(
-        this.auth,
-        authModel.email ?? '',
-        authModel.password ?? ''
-      );
-      return user;
-    } catch (e) {
-      return null;
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(this.auth, provider);
+      const user = result.user;
+      console.log('User:', user);
+      // Handle the user here
+    } catch (error) {
+      console.error(error);
     }
     
   }
@@ -50,8 +36,7 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  isAuthenticated() {
-    // TODO: Add store so refresh wont affect the result
+  get isAuthenticated() {
     return !!this.auth.currentUser;
   }
 

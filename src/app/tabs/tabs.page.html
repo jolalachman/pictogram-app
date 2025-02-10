@@ -2,22 +2,18 @@
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" href="/tabs/tab1">
       <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-      <ion-label>{{ 'SENTENCE.CREATE_SENTENCE' | translate}}</ion-label>
     </ion-tab-button>
 
-    @if (!isAuthenticated()) {
+    @if (!isAuthenticated) {
       <ion-tab-button tab="auth" href="/tabs/auth">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <ion-label>{{ 'AUTH.AUTHORIZATION' | translate }}</ion-label>
       </ion-tab-button>
     } @else {
       <ion-tab-button tab="tab2" href="/tabs/tab2">
         <ion-icon name="reload-outline"></ion-icon>
-        <ion-label>{{ 'HISTORY.HISTORY' | translate}}</ion-label>
       </ion-tab-button>
       <ion-tab-button tab="auth" (click)="logout()">
         <ion-icon name="person-circle-outline"></ion-icon>
-        <ion-label>{{ 'AUTH.SIGN_OUT' | translate }}</ion-label>
       </ion-tab-button>
     }
   </ion-tab-bar>

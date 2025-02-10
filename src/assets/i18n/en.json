@@ -1,26 +1,19 @@
 {
   "AUTH": {
-    "AUTHORIZATION": "Authorization",
-    "SIGN_IN": "Sign in",
-    "SIGN_OUT": "Sign out",
-    "EMAIL": "Email:",
-    "EMAIL_INVALID": "Invalid email",
-    "PASSWORD": "Password:",
-    "PASSWORD_INVALID": "Invalid password",
-    "PASSWORD_HINT": "Password should have at least 8 characters",
-    "SIGN_IN_BUTTON": "Sign in",
-    "REGISTER": "Register account",
-    "CREATE_ACCOUNT": "Create account",
-    "ALREADY_HAVE_ACCOUNT": "Have account already?"
+    "CONTINUE_WITH_GOOGLE": "Continue with Google",
+    "WELCOME_TEXT": "Welcome user!"
   },
   "SENTENCE" : {
-    "CREATE_SENTENCE": "Create sentence",
-    "GENERATE_SENTENCE": "Generate sentence",
+    "CREATE_SENTENCE": "Create a sentence",
+    "GENERATE_SENTENCE": "Generate the sentence",
+    "CATEGORIES": "Categories",
+    "ALL": "All",
     "NOUNS": "Nouns",
     "VERBS": "Verbs",
     "ADJECTIVES": "Adjectives",
     "QUESTIONS": "Questions",
-    "EXPRESSIONS": "Expressions"
+    "EXPRESSIONS": "Expressions",
+    "GENERATED_SENTENCE": "Generated sentence"
   },
   "HISTORY": {
     "HISTORY": "History"

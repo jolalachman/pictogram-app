@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonInput, IonButton, IonBackButton, IonSelect, IonSelectOption, IonPopover } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
-import { TileService } from '../services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faS, fas } from '@fortawesome/free-solid-svg-icons';
-import { faIcons } from '@fortawesome/free-solid-svg-icons';
 import { faCoffee, faHeart, faStar, faAppleAlt, faCarSide, faCar } from '@fortawesome/free-solid-svg-icons';
+import { TileService } from '../../services/tile.service';
 
 library.add(faCoffee, faHeart, faStar, faAppleAlt, faCarSide, faCar);
 

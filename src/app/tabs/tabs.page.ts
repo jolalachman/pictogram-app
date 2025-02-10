@@ -29,11 +29,11 @@ export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
   constructor(private authService: AuthService) {
-    addIcons({chatbubbleEllipsesOutline,reloadOutline,personCircleOutline});
+    addIcons({personCircleOutline,reloadOutline,chatbubbleEllipsesOutline});
   }
 
-  public isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
   }
 
   public logout() {

@@ -1,10 +1,18 @@
-.button-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
+@import '../../../../theme/variables.scss';
+:host {
 
-.grid {
-    margin-bottom: 50px;
+    .button-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .grid {
+        margin-bottom: 50px;
+    }
+
+    .column-label {
+        color: $highlight-color;
+    }
 }

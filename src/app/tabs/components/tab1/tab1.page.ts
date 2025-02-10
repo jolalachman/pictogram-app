@@ -6,7 +6,9 @@ import {
   IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonButton, IonIcon,
   IonFab,
   IonFabButton,
-  IonAlert } from '@ionic/angular/standalone';
+  IonButtons,
+  IonMenuButton,
+} from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { Tile } from 'src/app/models/tile.model';
 import { CommonModule, NgFor } from '@angular/common';
@@ -17,10 +19,11 @@ import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../auth/services';
 import { HistoryService } from './services/history.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { APIService } from './services/api.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
+import { GeneratedSentenceComponent, MenuComponent, TileComponent } from './components';
 
 @Component({
   selector: 'app-tab1',
@@ -37,16 +40,21 @@ import { TextToSpeech } from '@capacitor-community/text-to-speech';
     ExploreContainerComponent,
     NgFor,
     FontAwesomeModule,
-    IonAlert,
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    IonMenuButton,
+    IonButtons,
+    MenuComponent,
+    TileComponent,
+    GeneratedSentenceComponent,
   ],
 })
-export class Tab1Page implements OnInit{
+export class Tab1Page {
   tiles$: Observable<Tile[]> = this.tileService.getUserTiles();
-  selectedTiles: Tile[] = [];
+  private selectedTiles: BehaviorSubject<Tile[]> = new BehaviorSubject([] as Tile[]);
+  selectedTiles$ = this.selectedTiles.asObservable();
   generatedSentence: string | null = '';
-  showPopup: boolean = false;
+  selectedCategory?: 'nouns' | 'verbs' | 'adjectives' | 'questions' |'expressions';
 
   constructor(
     public route: Router,
@@ -54,31 +62,37 @@ export class Tab1Page implements OnInit{
     private authService: AuthService,
     private apiService: APIService,
     private historyService: HistoryService,
+    private translate: TranslateService,
   ) {
     addIcons({heart, add});
   }
 
-  async ngOnInit(){
-    this.authService.getCurrentUser().subscribe(user => {
-      console.log("Zalogowany użytkownik:", user?.uid || "Brak");
-    });
+  get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
   }
 
   toggleTileSelection(tile: Tile): void {
     tile.isSelected = !tile.isSelected;
+    const tiles = this.selectedTiles.value;
+    if(tile.isSelected) {
+      this.selectedTiles.next([...tiles, tile]);
+    }
+    else {
+      const index = tiles.indexOf(tile);
+      if (index !== -1) {
+        // Create a new array without the unselected tile
+        tiles.splice(index, 1);
+        this.selectedTiles.next([...tiles]);  // Emit the updated array
+      }
+    }
   }
 
 
   generateSentence(tiles: Tile[]) {
-    for(const tile of tiles){
-      if(tile.isSelected == true){
-        this.selectedTiles.push(tile);
-      }
-    }
+    const selectedTiles = this.selectedTiles.value;
+    const prompt = selectedTiles.map(tile => tile.label).join(' ');
 
-    const prompt = this.selectedTiles.map(tile => tile.label).join(' ');
-
-    if (this.selectedTiles.length > 0) {
+    if (selectedTiles.length > 0) {
       console.log('Selectes tiles:', prompt);
     } else {
       console.log('No tiles selected');
@@ -86,10 +100,10 @@ export class Tab1Page implements OnInit{
     
     this.apiService.generateSentece(prompt).then(sentence => {
       this.generatedSentence = sentence;
-      const iconNames = this.selectedTiles.map(tile => tile.icon).join(' ');
+      const iconNames = selectedTiles.map(tile => tile.icon).join(' ');
 
       this.historyService.saveHistory(iconNames, sentence || '').then(() => {
-        this.selectedTiles = [];
+        this.selectedTiles.next([]);
         this.speak(sentence);
       });
     });
@@ -100,7 +114,7 @@ export class Tab1Page implements OnInit{
  speak = async (sentence: string| null) => {
     await TextToSpeech.speak({
       text: sentence ?? '',
-      lang: 'pl-PL',
+      lang: this.translate.currentLang === 'pl' ? 'pl-PL' : 'en-US',
       rate: 1.0,
       pitch: 1.0,
       volume: 1.0,
@@ -114,6 +128,10 @@ export class Tab1Page implements OnInit{
   }
 
   getCategory(tiles: Tile[], category: string) {
-    return tiles.some(tile => tile.category === category)
+    return tiles.some(tile => tile.category === category) && (this.selectedCategory === category || !this.selectedCategory);
+  }
+
+  onCategorySelected(event?: 'nouns' | 'verbs' | 'adjectives' | 'questions' |'expressions') {
+    this.selectedCategory = event;
   }
 }

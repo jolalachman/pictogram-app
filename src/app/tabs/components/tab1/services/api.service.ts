@@ -23,7 +23,7 @@ export class APIService {
       model: "gpt-4o-mini",
       store: true,
       messages: [
-        {"role": "user", "content": `Stwórz zdanie z podanych wyrazów: ${inputWords} w języku ${this.translate.currentLang}. Wygenerowane zdanie ma za zadanie ułatwić komunikację osobom z trudnościami (np. nieumiejącym mówić).`},
+        {"role": "user", "content": `Stwórz zdanie z podanych wyrazów: ${inputWords} w języku ${this.translate.currentLang}. Nie odnoś się do poprzednio wygenerowanych zdań i nie dodawaj nic nadmiarowego, ale popraw je aby miało sens gramatycznie.`},
       ],
     });
     

@@ -1,26 +1,19 @@
 {
   "AUTH": {
-    "AUTHORIZATION": "Autoryzacja",
-    "SIGN_IN": "Logowanie",
-    "SIGN_OUT": "Wyloguj się",
-    "EMAIL": "Email:",
-    "EMAIL_INVALID": "Niepoprawny email",
-    "PASSWORD": "Hasło:",
-    "PASSWORD_INVALID": "Niepoprawne hasło",
-    "PASSWORD_HINT": "Hasło powinno mieć co najmniej 8 znaków",
-    "SIGN_IN_BUTTON": "Zaloguj się",
-    "REGISTER": "Zarejestruj się",
-    "CREATE_ACCOUNT": "Stwórz konto",
-    "ALREADY_HAVE_ACCOUNT": "Posiadasz już konto?"
+    "CONTINUE_WITH_GOOGLE": "Kontynuuj z Google",
+    "WELCOME_TEXT": "Witaj użytkowniku!"
   },
   "SENTENCE" : {
     "CREATE_SENTENCE": "Stwórz zdanie",
     "GENERATE_SENTENCE": "Generuj zdanie",
+    "CATEGORIES": "Kategorie",
+    "ALL": "Wszystko",
     "NOUNS": "Rzeczowniki",
     "VERBS": "Czasowniki",
     "ADJECTIVES": "Przymiotniki",
     "QUESTIONS": "Pytania",
-    "EXPRESSIONS": "Wyrażenia"
+    "EXPRESSIONS": "Wyrażenia",
+    "GENERATED_SENTENCE": "Utworzone zdanie"
   },
   "HISTORY": {
     "HISTORY": "Historia"

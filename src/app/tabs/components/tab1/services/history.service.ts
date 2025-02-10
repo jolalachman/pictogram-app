@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, query, where, getDocs } from '@angular/fire/firestore';
 import { HistoryModel } from 'src/app/models/history.model';
 import { AuthService } from '../../auth/services';
-import { Tile } from 'src/app/models/tile.model';
-import { orderBy } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
