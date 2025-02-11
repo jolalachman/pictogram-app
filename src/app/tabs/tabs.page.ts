@@ -12,6 +12,7 @@ import { triangle, ellipse, personCircleOutline, chatbubbleEllipsesOutline, relo
 import { AuthService } from './components/auth/services';
 import { CommonModule } from '@angular/common';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -33,11 +34,14 @@ export class TabsPage {
 
   user$ = this.authService.user$;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     addIcons({chatbubbleEllipsesOutline,reloadOutline,exitOutline,personCircleOutline});
   }
 
   public logout() {
-    this.authService.logout();
+    this.authService.logout().finally( () => { 
+      this.router.navigate(['/tabs/tab1']);
+      return;
+  });
   }
 }

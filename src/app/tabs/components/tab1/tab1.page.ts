@@ -23,7 +23,7 @@ import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../auth/services';
 import { HistoryService } from './services/history.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { APIService } from './services/api.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -61,13 +61,15 @@ import { FormsModule, NgModel } from '@angular/forms';
 })
 export class Tab1Page {
   @ViewChild(IonModal) modal!: IonModal;
-  tiles$: Observable<Tile[]> = this.tileService.getUserTiles();
+  tiles$: Observable<Tile[]> = this.tileService.getUserTiles().pipe(tap(()=>this.selectedTiles.next([])));
+  
   private selectedTiles: BehaviorSubject<Tile[]> = new BehaviorSubject([] as Tile[]);
   selectedTiles$ = this.selectedTiles.asObservable();
   generatedSentence: string | null = '';
   selectedCategory?: 'nouns' | 'verbs' | 'adjectives' | 'questions' |'expressions';
   user$ = this.authService.user$;
   isPlayMode: boolean = false;
+  modalOpened = false;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name!: string;
@@ -159,7 +161,7 @@ export class Tab1Page {
   }
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    this.modalOpened = false;
   }
 
   async confirm() {
@@ -174,7 +176,7 @@ export class Tab1Page {
     this.category = '';
     this.tileService.addTile(pictogram).then(() => {
       this.tiles$ = this.tileService.getUserTiles();
-      this.modal.dismiss(null, 'confirm');
+      this.modalOpened = false;
     });
   }
 
@@ -182,5 +184,8 @@ export class Tab1Page {
     this.tileService.deleteTile(tile).then(() => {
       this.tiles$ = this.tileService.getUserTiles();
     });
+  }
+  openModal() {
+    this.modalOpened = true;
   }
 }

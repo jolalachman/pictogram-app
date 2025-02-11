@@ -100,9 +100,11 @@ export class Tab2Page implements OnInit {
   }
 
   speak = async (sentence: string | null) => {
+    const { languages } = await TextToSpeech.getSupportedLanguages();
+    const lang = languages.find((x: string) => x.includes(this.translate.currentLang));
     await TextToSpeech.speak({
       text: sentence ?? '',
-      lang: this.translate.currentLang === 'pl' ? 'pl-PL' : 'en-US',
+      lang: lang,
       rate: 1.0,
       pitch: 1.0,
       volume: 1.0,
@@ -118,7 +120,7 @@ export class Tab2Page implements OnInit {
   }
 
   async handleDelete(event: string) {
-    const result = await this.historyService.deleteHistoryByGeneratedSentence(event).then(() => this.loadHistory());
+    const result = await this.historyService.deleteHistoryByGeneratedSentence(event).finally(() => this.loadHistory());
   }
   
 }

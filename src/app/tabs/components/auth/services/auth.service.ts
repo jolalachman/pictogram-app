@@ -43,8 +43,8 @@ export class AuthService {
     }
   }
 
-  logout(): Promise<void> {
-    return FirebaseAuthentication.signOut();
+  async logout(): Promise<void> {
+    return await FirebaseAuthentication.signOut();
   }
 
   async isAuthenticated(): Promise<boolean> {
