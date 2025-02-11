@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -55,6 +55,7 @@ export class Tab1Page {
   selectedTiles$ = this.selectedTiles.asObservable();
   generatedSentence: string | null = '';
   selectedCategory?: 'nouns' | 'verbs' | 'adjectives' | 'questions' |'expressions';
+  user$ = this.authService.user$;
 
   constructor(
     public route: Router,
@@ -65,10 +66,6 @@ export class Tab1Page {
     private translate: TranslateService,
   ) {
     addIcons({heart, add});
-  }
-
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated;
   }
 
   toggleTileSelection(tile: Tile): void {
@@ -92,10 +89,8 @@ export class Tab1Page {
     const selectedTiles = this.selectedTiles.value;
     const prompt = selectedTiles.map(tile => tile.label).join(' ');
 
-    if (selectedTiles.length > 0) {
-      console.log('Selectes tiles:', prompt);
-    } else {
-      console.log('No tiles selected');
+    if (selectedTiles.length === 0) {
+      return;
     }
     
     this.apiService.generateSentece(prompt).then(sentence => {

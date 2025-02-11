@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "70891499467",
+    "project_id": "pictogram-app-9d0e7",
+    "storage_bucket": "pictogram-app-9d0e7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70891499467:android:312f77fe94c3357002904e",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh6mJiyXnUzQs1RKvSIOUTMM2oh6_EP0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

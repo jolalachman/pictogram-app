@@ -4,15 +4,15 @@
       <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
     </ion-tab-button>
 
-    @if (!isAuthenticated) {
-      <ion-tab-button tab="auth" href="/tabs/auth">
-        <ion-icon name="person-circle-outline"></ion-icon>
-      </ion-tab-button>
-    } @else {
+    @if (user$ | async) {
       <ion-tab-button tab="tab2" href="/tabs/tab2">
         <ion-icon name="reload-outline"></ion-icon>
       </ion-tab-button>
       <ion-tab-button tab="auth" (click)="logout()">
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-tab-button>
+    } @else {
+      <ion-tab-button tab="auth" href="/tabs/auth">
         <ion-icon name="person-circle-outline"></ion-icon>
       </ion-tab-button>
     }

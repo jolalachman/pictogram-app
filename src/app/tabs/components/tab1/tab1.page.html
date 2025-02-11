@@ -18,7 +18,7 @@
         <ion-fab horizontal="center" vertical="bottom" slot="fixed">
           <div class="button-container"> 
             <ion-button *ngIf="selectedTiles.length > 0" shape="round" (click)="generateSentence(tiles)">{{ 'SENTENCE.GENERATE_SENTENCE' | translate}}</ion-button>
-            <ion-button *ngIf="isAuthenticated" shape="round" (click)="navigateToAddTilePage()">
+            <ion-button *ngIf="user$ | async" shape="round" (click)="navigateToAddTilePage()">
               <ion-icon slot="icon-only" name="add"></ion-icon>
             </ion-button>
           </div>

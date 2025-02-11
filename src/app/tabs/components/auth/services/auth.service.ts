@@ -5,7 +5,7 @@ import {
   signInWithPopup,
   signOut,
   user,
-  User, 
+  User,
 } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
@@ -13,35 +13,34 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  // Observable to track the user
   user$: Observable<User | null>;
+
   constructor(private auth: Auth) {
+    // Initialize user$ as an observable that tracks user changes
     this.user$ = user(this.auth);
   }
 
-
-  async googleLogin() {
+  // Method for Google login
+  async googleLogin(): Promise<void> {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(this.auth, provider);
       const user = result.user;
       console.log('User:', user);
-      // Handle the user here
+      // Handle the user here (e.g., store user info or set user state)
     } catch (error) {
-      console.error(error);
+      console.error('Error during Google login:', error);
     }
-    
   }
 
-  logout() {
+  // Method to log out
+  logout(): Promise<void> {
     return signOut(this.auth);
   }
 
-  get isAuthenticated() {
-    return !!this.auth.currentUser;
-  }
-
+  // Method to get the current user as observable
   getCurrentUser(): Observable<User | null> {
     return this.user$;
   }
-  
 }
