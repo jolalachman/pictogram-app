@@ -1,46 +1,57 @@
 import { Injectable } from '@angular/core';
-import {
-  Auth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-  user,
-  User,
-} from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { FirebaseAuthentication, User } from '@capacitor-firebase/authentication';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // Observable to track the user
-  user$: Observable<User | null>;
+  private user: BehaviorSubject<User | null> = new BehaviorSubject(null as User | null);
+  user$: Observable<User | null> = this.user.asObservable();
 
-  constructor(private auth: Auth) {
-    // Initialize user$ as an observable that tracks user changes
-    this.user$ = user(this.auth);
+  constructor(private router: Router) {
+    this.initializeAuthListener();
+  }
+
+  private initializeAuthListener() {
+    FirebaseAuthentication.addListener('authStateChange', (user) => {
+      if (user) {
+        this.user.next(user.user);
+      } else {
+        this.user.next(null);
+      }
+    });
+  }
+
+  private async signInWithGoogle(){
+    const result = await FirebaseAuthentication.signInWithGoogle();
+    return result.user;
   }
 
   // Method for Google login
   async googleLogin(): Promise<void> {
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(this.auth, provider);
-      const user = result.user;
-      console.log('User:', user);
-      // Handle the user here (e.g., store user info or set user state)
+      const result = await this.signInWithGoogle();
+      const user = result;
+      if (user) {
+        this.router.navigate(['/tabs/tab1']);
+
+      }
     } catch (error) {
       console.error('Error during Google login:', error);
     }
   }
 
-  // Method to log out
   logout(): Promise<void> {
-    return signOut(this.auth);
+    return FirebaseAuthentication.signOut();
   }
 
-  // Method to get the current user as observable
-  getCurrentUser(): Observable<User | null> {
-    return this.user$;
+  async isAuthenticated(): Promise<boolean> {
+    return await FirebaseAuthentication.getCurrentUser().then(x => !!x.user);
+  }
+
+  async getUserId(): Promise<string | boolean | undefined> {
+    return await FirebaseAuthentication.getCurrentUser().then(x => x.user?.uid);
   }
 }

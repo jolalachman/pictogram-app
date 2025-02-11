@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { FontAwesomeModule, FaIconLibrary  } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -28,6 +29,8 @@ export class AppComponent {
 
     const browserLang = translate.getBrowserLang() ?? 'pl';
     translate.use(browserLang.match(/en|pl/) ? browserLang : 'pl');
+    StatusBar.setOverlaysWebView({ overlay: false });
+    StatusBar.setStyle({ style: Style.Dark });
     library.addIconPacks(fas);
   }
 }

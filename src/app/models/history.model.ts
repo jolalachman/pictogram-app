@@ -1,8 +1,9 @@
-import { Tile } from "./tile.model";
+import { Timestamp } from "firebase/firestore";
 
 export interface HistoryModel {
     userId: string,
     selectedTiles: string,
     generatedSentence: string,
-    creationDate: Date
+    creationDate: Timestamp,
+    isSelected?: boolean,
 }

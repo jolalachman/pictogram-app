@@ -1,19 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Historia utworzonych zdań </ion-title>
+    <ion-title>{{ 'HISTORY.HISTORY_TITLE' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let history of historyList">
-      <ion-label>
-        <div class="icons">
-          <ion-label *ngFor="let icon of history.selectedTiles.split(' ')">{{icon}}</ion-label>
-        </div>
-        <p class="sentence">{{ history.generatedSentence }}</p>
-      </ion-label>
-    </ion-item>
-
-  </ion-list>
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+    <div class="button-container"> 
+      <ion-button *ngIf="selectedTile" shape="round" (click)="playSentence()" [disabled]="isPlayMode">{{ 'HISTORY.REPLAY_SENTENCE' | translate}}</ion-button>
+    </div>
+  </ion-fab>
+  <div class="history">
+    <ion-item-sliding *ngFor="let history of historyList" >
+      <ion-item>
+        <app-tile class="tile" [isSelected]="!!history.isSelected" [icon]="history.selectedTiles" [label]="history.generatedSentence" (click)="toggleTileSelection(history)"></app-tile>
+      </ion-item>
+  
+      <ion-item-options>
+        <ion-item-option (click)="handleDelete(history.generatedSentence)" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </div>
 </ion-content>

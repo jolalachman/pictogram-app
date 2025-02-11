@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { canActivate, redirectLoggedInTo } from '@angular/fire/auth-guard';
-
-const redirectLoggedinToTab1 = () => redirectLoggedInTo(['tabs/tab1']);
+import { AuthGuard } from '../auth.guard';
 
 export const routes: Routes = [
   {
@@ -25,17 +23,20 @@ export const routes: Routes = [
           import('./components/auth/auth.page').then(
             m => m.AuthPage
           ),
-        ...canActivate(redirectLoggedinToTab1),
       },
       {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full',
       },
+      {
+        path: '**',
+        redirectTo: '/tabs/tab1',
+      },
     ],
   },
   {
-    path: '',
+    path: '**',
     redirectTo: '/tabs/tab1',
     pathMatch: 'full',
   },

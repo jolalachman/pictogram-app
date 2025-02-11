@@ -13,10 +13,21 @@
     "ADJECTIVES": "Adjectives",
     "QUESTIONS": "Questions",
     "EXPRESSIONS": "Expressions",
-    "GENERATED_SENTENCE": "Generated sentence"
+    "GENERATED_SENTENCE": "Generated sentence",
+    "PLAYING_SENTENCE": "Playing the sentence"
+  },
+  "ADD_SENTENCE": {
+    "ADD": "Add",
+    "CANCEL": "Cancel",
+    "TITLE": "Add your pictogram",
+    "ICON": "Icon",
+    "NAME": "Name",
+    "CATEGORY": "Category"
   },
   "HISTORY": {
-    "HISTORY": "History"
+    "HISTORY": "History",
+    "HISTORY_TITLE": "History of generated sentences",
+    "REPLAY_SENTENCE": "Replay the sentence"
   },
   "Person": "Person",
   "House": "House",

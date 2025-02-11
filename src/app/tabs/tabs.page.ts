@@ -31,7 +31,7 @@ import { tap } from 'rxjs';
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
-  user$ = this.authService.user$.pipe(tap(x => console.log(x)));
+  user$ = this.authService.user$;
 
   constructor(private authService: AuthService) {
     addIcons({chatbubbleEllipsesOutline,reloadOutline,exitOutline,personCircleOutline});

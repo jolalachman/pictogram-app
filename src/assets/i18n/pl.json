@@ -13,10 +13,21 @@
     "ADJECTIVES": "Przymiotniki",
     "QUESTIONS": "Pytania",
     "EXPRESSIONS": "Wyrażenia",
-    "GENERATED_SENTENCE": "Utworzone zdanie"
+    "GENERATED_SENTENCE": "Utworzone zdanie",
+    "PLAYING_SENTENCE": "Odtwarzanie zdania"
+  },
+  "ADD_SENTENCE": {
+    "ADD": "Dodaj",
+    "CANCEL": "Anuluj",
+    "TITLE": "Dodaj swój piktogram",
+    "ICON": "Ikona",
+    "NAME": "Nazwa",
+    "CATEGORY": "Kategoria"
   },
   "HISTORY": {
-    "HISTORY": "Historia"
+    "HISTORY": "Historia",
+    "HISTORY_TITLE": "Historia utworzonych zdań",
+    "REPLAY_SENTENCE": "Odtwórz zdanie ponownie"
   },
   "Person": "Osoba",
   "House": "Dom",
@@ -70,6 +81,7 @@
   "Excuse me": "Przepraszam",
   "Good morning": "Dzień dobry",
   "Good night": "Dobranoc",
-  "Goodbye": "Do widzenia"
+  "Goodbye": "Do widzenia",
+  "Rate limit reached for gpt-4o-mini in organization org-8jJiQMyvFiHfP6K842wo0cL3 on requests per min (RPM): Limit 3, Used 3, Requested 1. Please try again in 20s. Visit https://platform.openai.com/account/rate-limits to learn more.": "Osiągnięto limit liczby zapytań dla modelu gpt-4o-mini w organizacji org-8jJiQMyvFiHfP6K842wo0cL3 w zakresie zapytań na minutę (RPM): Limit 3, Użyte 3, Żądane 1. Proszę spróbować ponownie za 20 sekund. Odwiedź https://platform.openai.com/account/rate-limits, aby dowiedzieć się więcej."
 
 }

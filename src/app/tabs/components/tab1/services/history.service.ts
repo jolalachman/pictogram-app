@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, query, where, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, query, where, getDocs, orderBy, deleteDoc } from '@angular/fire/firestore';
 import { HistoryModel } from 'src/app/models/history.model';
 import { AuthService } from '../../auth/services';
 
@@ -12,7 +12,7 @@ export class HistoryService {
   constructor(private firestore: Firestore, private authService: AuthService) {}
 
   async saveHistory(selectedTiles: string, generatedSentence: string) {
-    this.authService.getCurrentUser().subscribe( async user => {
+    this.authService.user$.subscribe( async user => {
       if(!user) {
         console.log("Nie można zapisać historii, użytkownik niezalogowany");
         return;
@@ -41,11 +41,10 @@ export class HistoryService {
   async getUserHistory(): Promise<HistoryModel[]> {
 
     return new Promise((resolve) => {
-      this.authService.getCurrentUser().subscribe(async user => {
+      this.authService.user$.subscribe(async user => {
         try{
           let q;
           if (user) {
-            // q = query(this.historyCollection, where('userId', '==', user.uid), orderBy('creationDate', 'desc'));
             q = query(this.historyCollection, where('userId', '==', user.uid));
 
           } else {
@@ -65,7 +64,8 @@ export class HistoryService {
                 generatedSentence: data['generatedSentence'],
                 creationDate: data['creationDate']
               } as HistoryModel
-            });
+            })
+            .sort((a, b) => b.creationDate.seconds - a.creationDate.seconds);
 
             resolve(history);
         } catch (error){
@@ -76,5 +76,30 @@ export class HistoryService {
         });
     });
 
+  }
+
+  async deleteHistoryByGeneratedSentence(generatedSentence: string) {
+    this.authService.user$.subscribe( async user => {
+      if (!user) {
+        return;
+      }
+      try {
+        const historyQuery = query(
+          this.historyCollection,
+          where("userId", "==", user.uid),
+          where("generatedSentence", "==", generatedSentence)
+        );
+  
+        const querySnapshot = await getDocs(historyQuery);
+  
+        if (!querySnapshot.empty) {
+          querySnapshot.forEach(async (docSnapshot) => {
+            await deleteDoc(docSnapshot.ref);
+          });
+        }
+      } catch (error) {
+        console.log('Error deleting history record: ', error);
+      }
+    });
   }
 }

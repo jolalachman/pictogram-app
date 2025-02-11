@@ -14,9 +14,9 @@ export class TileService {
 
   constructor(private firestore: Firestore, private authService: AuthService) { }
 
-  async addTile(tile: {label: string; isCustom: boolean, iconName: string}){
+  async addTile(tile: {label: string; isCustom: boolean, icon: string, category: string}){
 
-    this.authService.getCurrentUser().subscribe( async user => {
+    this.authService.user$.subscribe( async user => {
       if(!user) {
         console.log("Nie można dodać, użytkownik niezalogowany");
         return;
@@ -31,18 +31,16 @@ export class TileService {
         const docRef = await addDoc(this.tilesCollection, 
           newTile
         );
-        console.log('Tile added with ID: ', docRef.id);
       } catch (error){
       console.log('Error adding tile: ', error);
       }
-      window.location.reload();
 
     });
 
   }
 
   getUserTiles(): Observable<Tile[]> {
-    return this.authService.getCurrentUser().pipe(
+    return this.authService.user$.pipe(
       switchMap(user => {
         let q;
         if (user) {
@@ -83,6 +81,35 @@ export class TileService {
       console.log('Error seeding database: ', error);
     }
     
+  }
+
+  async deleteTile(tile: Tile) {
+    this.authService.user$.subscribe( async user => {
+      if(!user) {
+        console.log("Nie można dodać, użytkownik niezalogowany");
+        return;
+      }
+
+      try {
+        const querySnapshot = await getDocs(this.tilesCollection);
+        const tileToDelete = querySnapshot.docs.find((docSnapshot) => {
+          const data = docSnapshot.data();
+          return data['userId'] === user.uid && data['icon'] === tile.icon && data['label']===tile.label;
+        });
+
+        if (tileToDelete) {
+          // Step 3: Delete the matching document
+          const docRef = doc(this.firestore, 'tiles', tileToDelete.id);
+          await deleteDoc(docRef);
+          console.log('Document deleted:', tileToDelete.id);
+        } else {
+          console.log('No matching tile found.');
+        }
+      } catch (error){
+        console.log('Error deleting tile: ', error);
+      }
+
+    });
   }
 
   async deleteAllTiles() {

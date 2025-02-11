@@ -1,9 +1,16 @@
 <ion-card [class.selected]="isSelected">
-  <ion-card-header>
-    <div class="icon">{{icon}}</div>
-  </ion-card-header>
-
   <ion-card-content>
-    <div class="label">{{label | translate}}</div>
+    <div class="icon">{{icon}}</div>
   </ion-card-content>
+
+    <ion-footer>
+      <div class="footer-content" [class.footer-padding]="!deletable">
+        <div class="label">{{label | translate}}</div>
+        @if(deletable) {
+          <ion-button shape="round" (click)="onDelete()">
+            <ion-icon slot="icon-only" name="trash" size="small"></ion-icon>
+          </ion-button>
+        }
+      </div>
+    </ion-footer>
 </ion-card>

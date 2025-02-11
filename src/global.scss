@@ -26,6 +26,7 @@ ion-toolbar {
 /* Content background */
 ion-content {
     --background: #{$secondary-color}; /* Dark purple background */
+    --padding-top: env(safe-area-inset-top);
 }
 
 /* Tab bar styling */

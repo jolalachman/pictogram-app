@@ -14,3 +14,13 @@
     justify-content: center;
     color: $text-color;
 }
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.footer-padding {
+    padding: 15px;
+}
