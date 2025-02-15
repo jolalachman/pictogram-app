@@ -29,6 +29,17 @@
     "HISTORY_TITLE": "Historia utworzonych zdań",
     "REPLAY_SENTENCE": "Odtwórz zdanie ponownie"
   },
+  "INFO" : {
+    "TITLE": "O aplikacji",
+    "AUTHORS": "Autorzy:",
+    "ENTER_PROMPT": "Polecenie",
+    "ENTER_PROMPT_HELPER": "AI użyje tego polecenia aby wygenerować zdanie z piktogramów",
+    "CHANGE": "Zmień",
+    "TILES_IN_ROW": "Ilość kafelków w wierszu",
+    "LANGUAGE": "Język",
+    "EN": "Angielski",
+    "PL": "Polski"
+  },
   "Person": "Osoba",
   "House": "Dom",
   "Food": "Jedzenie",

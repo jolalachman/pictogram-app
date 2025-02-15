@@ -5,7 +5,7 @@
 
     <ion-footer>
       <div class="footer-content" [class.footer-padding]="!deletable">
-        <div class="label">{{label | translate}}</div>
+        <div class="label">{{label | translate | uppercase}}</div>
         @if(deletable) {
           <ion-button shape="round" (click)="onDelete()">
             <ion-icon slot="icon-only" name="trash" size="small"></ion-icon>

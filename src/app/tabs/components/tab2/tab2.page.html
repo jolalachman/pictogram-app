@@ -14,14 +14,21 @@
     </div>
   </ion-fab>
   <div class="history">
-    <ion-item-sliding *ngFor="let history of historyList" >
-      <ion-item>
-        <app-tile class="tile" [isSelected]="!!history.isSelected" [icon]="history.selectedTiles" [label]="history.generatedSentence" (click)="toggleTileSelection(history)"></app-tile>
-      </ion-item>
-  
-      <ion-item-options>
-        <ion-item-option (click)="handleDelete(history.generatedSentence)" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    @if(historyList$ | async; as historyList) {
+      <ion-item-sliding *ngFor="let history of historyList" >
+        <ion-item>
+          <app-tile class="tile" [isSelected]="!!history.isSelected" [icon]="history.selectedTiles" [label]="history.generatedSentence" (click)="toggleTileSelection(history)"></app-tile>
+        </ion-item>
+    
+        <ion-item-options>
+          <ion-item-option (click)="handleDelete(history.generatedSentence)" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    }
+    @else {
+      <div class="spinner">
+        <ion-spinner color="light"></ion-spinner>
+      </div>
+    }
   </div>
 </ion-content>

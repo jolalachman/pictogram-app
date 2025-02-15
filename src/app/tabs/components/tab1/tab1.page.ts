@@ -12,7 +12,9 @@ import {
   IonSelectOption,
   IonModal,
   IonInput,
-  IonSpinner
+  IonSpinner,
+  IonRefresher,
+  IonRefresherContent,
 } from '@ionic/angular/standalone';
 import { Tile } from 'src/app/models/tile.model';
 import { CommonModule, NgFor } from '@angular/common';
@@ -23,7 +25,7 @@ import { TileService } from './services/tile.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../auth/services';
 import { HistoryService } from './services/history.service';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, of, switchMap, tap } from 'rxjs';
 import { APIService } from './services/api.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -56,12 +58,20 @@ import { FormsModule, NgModel } from '@angular/forms';
     IonSelect,
     IonSelectOption,
     FormsModule,
-    IonSpinner
+    IonSpinner,
+    IonRefresher,
+    IonRefresherContent,
   ],
 })
 export class Tab1Page {
   @ViewChild(IonModal) modal!: IonModal;
-  tiles$: Observable<Tile[]> = this.tileService.getUserTiles().pipe(tap(()=>this.selectedTiles.next([])));
+  refresh = new BehaviorSubject(false);
+  refresh$ = this.refresh.asObservable();
+  tiles$: Observable<Tile[]> = this.refresh$
+  .pipe(
+    switchMap(() => this.tileService.getUserTiles()),
+    tap(()=>this.selectedTiles.next([]))
+  );
   
   private selectedTiles: BehaviorSubject<Tile[]> = new BehaviorSubject([] as Tile[]);
   selectedTiles$ = this.selectedTiles.asObservable();
@@ -175,17 +185,33 @@ export class Tab1Page {
     this.name = '';
     this.category = '';
     this.tileService.addTile(pictogram).then(() => {
-      this.tiles$ = this.tileService.getUserTiles();
+      this.refreshTiles();
       this.modalOpened = false;
     });
   }
 
   deleteTile(tile: Tile) {
     this.tileService.deleteTile(tile).then(() => {
-      this.tiles$ = this.tileService.getUserTiles();
+      this.refreshTiles();
     });
   }
   openModal() {
     this.modalOpened = true;
+  }
+
+  get tileSize() {
+    return 12 / this.tileService.tileLayout;
+  }
+
+  refreshTiles() {
+    this.refresh.next(true);
+  }
+
+  async loadTiles() {
+    this.refreshTiles();
+  }
+
+  handleRefresh(event: CustomEvent) {
+    this.loadTiles().then(() => (event.target as HTMLIonRefresherElement).complete());
   }
 }

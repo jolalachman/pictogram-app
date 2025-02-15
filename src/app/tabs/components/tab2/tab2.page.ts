@@ -7,7 +7,7 @@ import {
   IonButton,
   IonRefresher,
   IonRefresherContent,
-  IonContent, IonList, IonItem, IonLabel, IonItemSliding,
+  IonContent, IonList, IonItem, IonLabel, IonItemSliding, IonSpinner,
 IonItemOptions,
 IonIcon,
 IonItemOption } from '@ionic/angular/standalone';
@@ -21,6 +21,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { addIcons } from 'ionicons';
 import { trash } from 'ionicons/icons';
+import { BehaviorSubject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -44,32 +45,23 @@ import { trash } from 'ionicons/icons';
     IonItemSliding,
     IonItemOptions,
     IonItemOption,
-    IonIcon
+    IonIcon, IonSpinner,
   ],
 })
-export class Tab2Page implements OnInit {
-
-  historyList: HistoryModel[] = [];
+export class Tab2Page {
+  refresh = new BehaviorSubject(false);
+  refresh$ = this.refresh.asObservable();
+  historyList$ = this.refresh$
+  .pipe(
+    switchMap(() => this.historyService.getUserHistory()),
+  );
   isPlayMode: boolean = false;
   selectedTile?: HistoryModel;
   
   constructor(private historyService: HistoryService,
-    private authService: AuthService,
     private translate: TranslateService
   ) {
       addIcons({trash});}
-
-  async ngOnInit() {
-    this.authService.user$.subscribe(() => {
-      this.loadHistory();
-    });
-
-    addIcons({trash});
-  }
-
-  async loadHistory() {
-    this.historyList = await this.historyService.getUserHistory();
-  }
 
   toggleTileSelection(tile: HistoryModel): void {
     // If it's in play mode, do nothing
@@ -114,6 +106,14 @@ export class Tab2Page implements OnInit {
       this.isPlayMode = false;
     });
   };
+
+  refreshHistory() {
+    this.refresh.next(true);
+  }
+
+  async loadHistory() {
+    this.refreshHistory();
+  }
 
   handleRefresh(event: CustomEvent) {
     this.loadHistory().then(() => (event.target as HTMLIonRefresherElement).complete());

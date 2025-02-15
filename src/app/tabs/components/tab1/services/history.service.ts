@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, collection, addDoc, query, where, getDocs, orderBy, deleteDoc } from '@angular/fire/firestore';
 import { HistoryModel } from 'src/app/models/history.model';
 import { AuthService } from '../../auth/services';
+import { from, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,25 +39,21 @@ export class HistoryService {
 
   }
 
-  async getUserHistory(): Promise<HistoryModel[]> {
+  getUserHistory(): Observable<HistoryModel[]> {
+    return this.authService.user$.pipe(
+      switchMap(user => {
+        let q;
+        if (user) {
+          q = query(this.historyCollection, where('userId', '==', user.uid));
 
-    return new Promise((resolve) => {
-      this.authService.user$.subscribe(async user => {
-        try{
-          let q;
-          if (user) {
-            q = query(this.historyCollection, where('userId', '==', user.uid));
+        } else {
+          console.log('Brak zalogowanego użytkownika, nie można pobrać historii');
+          return of([]);
+        }
 
-          } else {
-            console.log('Brak zalogowanego użytkownika, nie można pobrać historii');
-            resolve([]);
-            return;
-          }
-
-          const querySnapshot = await getDocs(q);
-
-          const history = querySnapshot.docs
-            .map(doc => {
+        return from(getDocs(q)).pipe(
+          switchMap(querySnapshot => {
+            const tiles = querySnapshot.docs.map(doc => {
               const data = doc.data();
               return {
                 userId: data['userId'],
@@ -64,18 +61,12 @@ export class HistoryService {
                 generatedSentence: data['generatedSentence'],
                 creationDate: data['creationDate']
               } as HistoryModel
-            })
-            .sort((a, b) => b.creationDate.seconds - a.creationDate.seconds);
-
-            resolve(history);
-        } catch (error){
-          console.error("Błąd pobierania historii:", error);
-          resolve([]);
-          // reject(error);
-        }
-        });
-    });
-
+            }).sort((a, b) => b.creationDate.seconds - a.creationDate.seconds);
+            return from([tiles]); // Return the tiles as an observable array
+          })
+        );
+      })
+    );
   }
 
   async deleteHistoryByGeneratedSentence(generatedSentence: string) {

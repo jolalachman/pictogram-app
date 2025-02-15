@@ -9,6 +9,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
+    <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     @if(tiles$ | async; as tiles) {
       <ion-fab vertical="top" slot="fixed" [style.width]="'100%'">
         <app-generated-sentence [selectedTiles$]="selectedTiles$" [generatedSentence]="generatedSentence" (speakEnded)="handleSpeakEnded()"></app-generated-sentence>
@@ -30,7 +33,7 @@
           <ion-col size="12" *ngIf="!selectedCategory">
             <h3 class="column-label">{{ 'SENTENCE.NOUNS' | translate}}</h3>
           </ion-col>
-          <ion-col size="6" *ngFor="let tile of tiles" [hidden]="tile.category !== 'nouns'">
+          <ion-col [size]="tileSize" *ngFor="let tile of tiles" [hidden]="tile.category !== 'nouns'">
             <app-tile [deletable]="tile.isCustom" (deleteTile)="deleteTile(tile)" [isSelected]="tile.isSelected" [icon]="tile.icon" [label]="tile.label" (click)="toggleTileSelection(tile)"></app-tile>
           </ion-col>
         </ion-row>
@@ -39,7 +42,7 @@
           <ion-col size="12" *ngIf="!selectedCategory">
             <h3 class="column-label">{{ 'SENTENCE.VERBS' | translate}}</h3>
           </ion-col>
-          <ion-col size="6" *ngFor="let tile of tiles" [hidden]="tile.category !== 'verbs'">
+          <ion-col [size]="tileSize"  *ngFor="let tile of tiles" [hidden]="tile.category !== 'verbs'">
             <app-tile [deletable]="tile.isCustom" (deleteTile)="deleteTile(tile)" [isSelected]="tile.isSelected" [icon]="tile.icon" [label]="tile.label" (click)="toggleTileSelection(tile)"></app-tile>
           </ion-col>
         </ion-row>
@@ -48,7 +51,7 @@
           <ion-col size="12" *ngIf="!selectedCategory">
             <h3 class="column-label">{{ 'SENTENCE.ADJECTIVES' | translate}}</h3>
           </ion-col>
-          <ion-col size="6" *ngFor="let tile of tiles" [hidden]="tile.category !== 'adjectives'">
+          <ion-col [size]="tileSize"  *ngFor="let tile of tiles" [hidden]="tile.category !== 'adjectives'">
             <app-tile [deletable]="tile.isCustom" (deleteTile)="deleteTile(tile)" [isSelected]="tile.isSelected" [icon]="tile.icon" [label]="tile.label" (click)="toggleTileSelection(tile)"></app-tile>
           </ion-col>
         </ion-row>
@@ -57,7 +60,7 @@
           <ion-col size="12" *ngIf="!selectedCategory">
             <h3 class="column-label">{{ 'SENTENCE.QUESTIONS' | translate}}</h3>
           </ion-col>
-          <ion-col size="6" *ngFor="let tile of tiles" [hidden]="tile.category !== 'questions'">
+          <ion-col [size]="tileSize"  *ngFor="let tile of tiles" [hidden]="tile.category !== 'questions'">
             <app-tile [deletable]="tile.isCustom" (deleteTile)="deleteTile(tile)" [isSelected]="tile.isSelected" [icon]="tile.icon" [label]="tile.label" (click)="toggleTileSelection(tile)"></app-tile>
           </ion-col>
         </ion-row>
@@ -66,7 +69,7 @@
           <ion-col size="12" *ngIf="!selectedCategory">
             <h3 class="column-label">{{ 'SENTENCE.EXPRESSIONS' | translate}}</h3>
           </ion-col>
-          <ion-col size="6" *ngFor="let tile of tiles" [hidden]="tile.category !== 'expressions'">
+          <ion-col [size]="tileSize"  *ngFor="let tile of tiles" [hidden]="tile.category !== 'expressions'">
             <app-tile [deletable]="tile.isCustom" (deleteTile)="deleteTile(tile)" [isSelected]="tile.isSelected" [icon]="tile.icon" [label]="tile.label" (click)="toggleTileSelection(tile)"></app-tile>
           </ion-col>
         </ion-row>
@@ -89,6 +92,7 @@
               <form #form="ngForm">
                 <div class="form">
                 <ion-input
+                  labelPlacement="stacked"
                   [label]="'ADD_SENTENCE.ICON' | translate"
                   inputmode="emoji"
                   maxlength="2"
@@ -98,6 +102,7 @@
                   required
                 ></ion-input>
                 <ion-input
+                  labelPlacement="stacked"
                   [label]="'ADD_SENTENCE.NAME' | translate"
                   maxlength="50"
                   type="text"
@@ -106,7 +111,9 @@
                   fill="solid"
                   required
                 ></ion-input>
-                <ion-select [label]="'ADD_SENTENCE.CATEGORY' | translate"
+                <ion-select
+                  labelPlacement="stacked"
+                  [label]="'ADD_SENTENCE.CATEGORY' | translate"
                   fill="solid"
                   [(ngModel)]="category"
                   name="category"

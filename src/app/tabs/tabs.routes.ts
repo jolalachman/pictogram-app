@@ -25,6 +25,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'info',
+        loadComponent: () =>
+          import('./components/info/info.component').then(
+            m => m.InfoComponent
+          ),
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full',

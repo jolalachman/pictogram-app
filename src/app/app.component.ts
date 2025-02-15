@@ -28,7 +28,8 @@ export class AppComponent {
     translate.setDefaultLang('pl');
 
     const browserLang = translate.getBrowserLang() ?? 'pl';
-    translate.use(browserLang.match(/en|pl/) ? browserLang : 'pl');
+    const storedLang = localStorage.getItem('lang');
+    translate.use(storedLang ?? (browserLang.match(/en|pl/) ? browserLang : 'pl'));
     StatusBar.setOverlaysWebView({ overlay: false });
     StatusBar.setStyle({ style: Style.Dark });
     library.addIconPacks(fas);

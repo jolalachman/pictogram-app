@@ -10,6 +10,8 @@ import { Observable, switchMap, from, async } from 'rxjs';
 })
 export class TileService {
 
+  private defaultTileLayout = 2;
+
   private tilesCollection = collection(this.firestore, 'tiles');
 
   constructor(private firestore: Firestore, private authService: AuthService) { }
@@ -128,6 +130,14 @@ export class TileService {
     } catch (error) {
       console.error('Error deleting tiles: ', error);
     }
+  }
+
+  get tileLayout(): number {
+    return parseInt(localStorage.getItem('tileLayout') ?? this.defaultTileLayout.toString());
+  }
+
+  changeTileLayout(newTileLayout: number) {
+    localStorage.setItem('tileLayout', newTileLayout.toString());
   }
   
 }

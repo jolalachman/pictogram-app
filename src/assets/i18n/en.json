@@ -29,6 +29,17 @@
     "HISTORY_TITLE": "History of generated sentences",
     "REPLAY_SENTENCE": "Replay the sentence"
   },
+  "INFO" : {
+    "TITLE": "About this app",
+    "AUTHORS": "Authors:",
+    "ENTER_PROMPT": "Prompt",
+    "ENTER_PROMPT_HELPER": "AI will use this to generate sentence from pictograms",
+    "CHANGE": "Change",
+    "TILES_IN_ROW": "Number of tiles in a row",
+    "LANGUAGE": "Language",
+    "EN": "English",
+    "PL": "Polish"
+  },
   "Person": "Person",
   "House": "House",
   "Food": "Food",

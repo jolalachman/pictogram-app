@@ -10,7 +10,11 @@ import { AlertController } from '@ionic/angular';
 })
 export class APIService {
 
-  constructor(private translate: TranslateService, private alertController: AlertController) { }
+  private defaultPrompt = 'Stwórz zdanie lub pytanie z podanych wyrazów. Nie odnoś się do poprzednio wygenerowanych zdań i nie dodawaj nic nadmiarowego, ale popraw je aby miało sens gramatycznie.';
+
+  constructor(private translate: TranslateService, private alertController: AlertController) {
+    localStorage.setItem('prompt', this.prompt);
+  }
 
   
   async generateSentece(inputWords: string): Promise<string | null> {
@@ -26,7 +30,7 @@ export class APIService {
         messages: [
           {
             "role": "user",
-            "content": `Stwórz zdanie lub pytanie z podanych wyrazów w języku ${this.translate.currentLang}. Nie odnoś się do poprzednio wygenerowanych zdań i nie dodawaj nic nadmiarowego, ale popraw je aby miało sens gramatycznie. Oto podane wyrazy: ${inputWords}`
+            "content": `${this.prompt}. Odpowiedz w języku w języku ${this.translate.currentLang}. Oto podane wyrazy: ${inputWords}`
           },
         ],
       });
@@ -47,5 +51,13 @@ export class APIService {
     });
 
     await alert.present();  // Show the alert
+  }
+
+  get prompt(): string {
+    return localStorage.getItem('prompt') ?? this.defaultPrompt;
+  }
+
+  changePrompt(newPrompt: string) {
+    localStorage.setItem('prompt', newPrompt);
   }
 }
