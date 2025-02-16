@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -65,7 +65,7 @@ import 'emoji-picker-element';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   refresh = new BehaviorSubject(false);
   refresh$ = this.refresh.asObservable();
@@ -89,6 +89,7 @@ export class Tab1Page {
   category!: string;
   icon!: string;
 
+  tileSize = 12;
 
   constructor(
     public route: Router,
@@ -99,6 +100,10 @@ export class Tab1Page {
     private translate: TranslateService,
   ) {
     addIcons({heart, add});
+  }
+
+  ngOnInit(): void {
+    this.getTileSize();
   }
 
   toggleTileSelection(tile: Tile): void {
@@ -122,6 +127,10 @@ export class Tab1Page {
         this.selectedTiles.next([...tiles]);  // Emit the updated array
       }
     }
+  }
+
+  ionViewWillEnter() {
+    this.getTileSize();
   }
 
 
@@ -202,8 +211,9 @@ export class Tab1Page {
     this.modalOpened = true;
   }
 
-  get tileSize() {
-    return 12 / this.tileService.tileLayout;
+  async getTileSize() {
+    const tLay = await this.tileService.getTileLayout();
+    this.tileSize =  12 / tLay;
   }
 
   refreshTiles() {

@@ -3,6 +3,7 @@
     <ion-label><h1>{{'INFO.TITLE' | translate}}</h1></ion-label>
     <span class="prompt-container">
       <ion-input
+      (ionChange)="promptChanged($event)"
       labelPlacement="stacked"
       [(ngModel)]="prompt"
       [label]="'INFO.ENTER_PROMPT' | translate"
@@ -14,6 +15,7 @@
     </span>
     <span class="prompt-container">
       <ion-select
+      (ionChange)="tLayChanged($event)"
       labelPlacement="stacked"
       [label]="'INFO.TILES_IN_ROW' | translate"
       fill="solid"
@@ -31,7 +33,8 @@
         labelPlacement="stacked"
         [label]="'INFO.LANGUAGE' | translate"
         fill="solid"
-        [(ngModel)]="language">
+        [(ngModel)]="language"
+        >
           <ion-select-option value="pl">{{'INFO.PL' | translate}}</ion-select-option>
           <ion-select-option value="en">{{'INFO.EN' | translate}}</ion-select-option>
         </ion-select>

@@ -36,6 +36,7 @@
     "@capacitor/keyboard": "7.0.0",
     "@capacitor/preferences": "7.0.0",
     "@capacitor/status-bar": "7.0.0",
+    "@capacitor/storage": "^1.2.5",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",

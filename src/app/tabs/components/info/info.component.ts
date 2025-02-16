@@ -15,6 +15,7 @@ import {
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { APIService } from '../tab1/services/api.service';
 import { TileService } from '../tab1/services/tile.service';
+import { setItem } from 'src/app/storage';
 
 @Component({
   selector: 'app-info',
@@ -37,23 +38,24 @@ import { TileService } from '../tab1/services/tile.service';
   ],
 })
 export class InfoComponent  implements OnInit {
-  prompt = this.apiService.prompt;
-  tileLayout = this.tileService.tileLayout;
+  prompt = '';
+  tileLayout = 0;
   language = this.translate.currentLang;
+  isPromptDefault = true;
+  isTileLayoutDefault = true;
   constructor(
     private apiService: APIService,
     private tileService: TileService,
     private translate: TranslateService
   ) { }
 
-  ngOnInit() {}
-
-  get isPromptDefault() {
-    return this.prompt === this.apiService.prompt;
+  ngOnInit() {
+    this.initDefault();
   }
 
-  get isTileLayoutDefault() {
-    return this.tileLayout === this.tileService.tileLayout;
+  async initDefault() {
+    this.prompt = await this.apiService.getPrompt();
+    this.tileLayout = await this.tileService.getTileLayout();
   }
 
   get isLanguageDefault() {
@@ -62,15 +64,25 @@ export class InfoComponent  implements OnInit {
 
   changePrompt() {
     this.apiService.changePrompt(this.prompt);
+    this.isPromptDefault = true;
   }
 
   changeTileLayout() {
     this.tileService.changeTileLayout(this.tileLayout);
+    this.isTileLayoutDefault = true;
   }
 
-  changeLanguage() {
+  async changeLanguage() {
     this.translate.use(this.language);
-    localStorage.setItem('lang', this.language);
+    await setItem('lang', this.language);
+  }
+
+  tLayChanged(event: any) {
+    this.isTileLayoutDefault = false;
+  }
+
+  promptChanged(event: any) {
+    this.isPromptDefault = false;
   }
 
 }

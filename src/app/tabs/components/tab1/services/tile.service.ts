@@ -4,6 +4,7 @@ import { addDoc, Firestore, getDocs, query, where } from '@angular/fire/firestor
 import { collection, deleteDoc, doc } from 'firebase/firestore';
 import { Tile } from 'src/app/models/tile.model';
 import { Observable, switchMap, from, async } from 'rxjs';
+import { getItem, setItem } from 'src/app/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -132,12 +133,13 @@ export class TileService {
     }
   }
 
-  get tileLayout(): number {
-    return parseInt(localStorage.getItem('tileLayout') ?? this.defaultTileLayout.toString());
+  async getTileLayout() {
+    const tLay = await getItem('tileLayout');
+    return parseInt(tLay ?? this.defaultTileLayout.toString());
   }
 
-  changeTileLayout(newTileLayout: number) {
-    localStorage.setItem('tileLayout', newTileLayout.toString());
+  async changeTileLayout(newTileLayout: number) {
+    await setItem('tileLayout', newTileLayout.toString());
   }
   
 }

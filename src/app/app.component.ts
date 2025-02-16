@@ -9,6 +9,7 @@ import { FontAwesomeModule, FaIconLibrary  } from '@fortawesome/angular-fontawes
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { getItem } from './storage';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -26,12 +27,15 @@ export class AppComponent {
   constructor(public translate: TranslateService, library: FaIconLibrary) {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('pl');
-
-    const browserLang = translate.getBrowserLang() ?? 'pl';
-    const storedLang = localStorage.getItem('lang');
-    translate.use(storedLang ?? (browserLang.match(/en|pl/) ? browserLang : 'pl'));
+    this.initializeLanguage();
     StatusBar.setOverlaysWebView({ overlay: false });
     StatusBar.setStyle({ style: Style.Dark });
     library.addIconPacks(fas);
+  }
+
+  async initializeLanguage() {
+    const browserLang = this.translate.getBrowserLang() ?? 'pl';
+    const storedLang = await getItem('lang');
+    this.translate.use(storedLang ?? (browserLang.match(/en|pl/) ? browserLang : 'pl'));
   }
 }

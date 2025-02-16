@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import OpenAI from 'openai';
 import { environment } from 'src/environments/environment';
 import { AlertController } from '@ionic/angular';
+import { getItem, setItem } from 'src/app/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,12 @@ export class APIService {
   private defaultPrompt = 'Stwórz zdanie lub pytanie z podanych wyrazów. Nie odnoś się do poprzednio wygenerowanych zdań i nie dodawaj nic nadmiarowego, ale popraw je aby miało sens gramatycznie.';
 
   constructor(private translate: TranslateService, private alertController: AlertController) {
-    localStorage.setItem('prompt', this.prompt);
+    this.initPrompt();
+  }
+
+  async initPrompt() {
+    const newPrompt = await this.getPrompt();
+    await setItem('prompt', newPrompt);
   }
 
   
@@ -23,6 +29,8 @@ export class APIService {
         apiKey: environment.openAPIKey,
         dangerouslyAllowBrowser: true
       });
+
+      const newPrompt = await this.getPrompt();
   
       const completion = await openai.chat.completions.create({
         model: "gpt-4o-mini",
@@ -30,7 +38,7 @@ export class APIService {
         messages: [
           {
             "role": "user",
-            "content": `${this.prompt}. Odpowiedz w języku w języku ${this.translate.currentLang}. Oto podane wyrazy: ${inputWords}`
+            "content": `${newPrompt}. Odpowiedz w języku w języku ${this.translate.currentLang}. Oto podane wyrazy: ${inputWords}`
           },
         ],
       });
@@ -53,11 +61,11 @@ export class APIService {
     await alert.present();  // Show the alert
   }
 
-  get prompt(): string {
-    return localStorage.getItem('prompt') ?? this.defaultPrompt;
+  async getPrompt() {
+    return await getItem('prompt') ?? this.defaultPrompt;
   }
 
-  changePrompt(newPrompt: string) {
-    localStorage.setItem('prompt', newPrompt);
+  async changePrompt(newPrompt: string) {
+    await setItem('prompt', newPrompt);
   }
 }
