@@ -1,6 +1,11 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="auth-container">
     <ion-label><h1>{{'AUTH.WELCOME_TEXT' | translate}}</h1></ion-label>
+    @if(loading) {
+      <div class="spinner">
+        <ion-spinner color="light"></ion-spinner>
+      </div>
+    }
     <button (click)="googleLogin()"class="gsi-material-button">
       <div class="gsi-material-button-state"></div>
       <div class="gsi-material-button-content-wrapper">

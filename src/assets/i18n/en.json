@@ -20,7 +20,7 @@
     "ADD": "Add",
     "CANCEL": "Cancel",
     "TITLE": "Add your pictogram",
-    "ICON": "Icon (emoji would work best)",
+    "ICON": "Icon",
     "NAME": "Name",
     "CATEGORY": "Category"
   },
@@ -40,6 +40,7 @@
     "EN": "English",
     "PL": "Polish"
   },
+  "NO_DATA": "There is no data. Check your internet connection and try again.",
   "Person": "Person",
   "House": "House",
   "Food": "Food",

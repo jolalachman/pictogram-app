@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -31,6 +31,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { GeneratedSentenceComponent, MenuComponent, TileComponent } from './components';
 import { FormsModule, NgModel } from '@angular/forms';
+import 'emoji-picker-element';
 
 @Component({
   selector: 'app-tab1',
@@ -62,12 +63,14 @@ import { FormsModule, NgModel } from '@angular/forms';
     IonRefresher,
     IonRefresherContent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1Page {
   @ViewChild(IonModal) modal!: IonModal;
   refresh = new BehaviorSubject(false);
   refresh$ = this.refresh.asObservable();
   tiles$: Observable<Tile[]> = this.refresh$
+  
   .pipe(
     switchMap(() => this.tileService.getUserTiles()),
     tap(()=>this.selectedTiles.next([]))
@@ -213,5 +216,9 @@ export class Tab1Page {
 
   handleRefresh(event: CustomEvent) {
     this.loadTiles().then(() => (event.target as HTMLIonRefresherElement).complete());
+  }
+
+  emojiClick(event: any) {
+    this.icon = event.detail.unicode;
   }
 }

@@ -20,7 +20,7 @@
     "ADD": "Dodaj",
     "CANCEL": "Anuluj",
     "TITLE": "Dodaj swój piktogram",
-    "ICON": "Ikona (najlepiej emoji)",
+    "ICON": "Ikona",
     "NAME": "Nazwa",
     "CATEGORY": "Kategoria"
   },
@@ -40,6 +40,7 @@
     "EN": "Angielski",
     "PL": "Polski"
   },
+  "NO_DATA": "Brak danych. Sprawdź połączenie z internetem i spróbuj ponownie.",
   "Person": "Osoba",
   "House": "Dom",
   "Food": "Jedzenie",

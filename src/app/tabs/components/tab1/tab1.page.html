@@ -27,6 +27,9 @@
           </div>
         </ion-fab>
       }
+      @if(tiles.length === 0) {
+        <ion-label><h1 class="highlight">{{ 'NO_DATA' | translate}}</h1></ion-label>
+      }
 
       <ion-grid class="grid">
         <ion-row *ngIf="getCategory(tiles, 'nouns')">
@@ -91,16 +94,17 @@
           <ion-content class="ion-padding">
               <form #form="ngForm">
                 <div class="form">
-                <ion-input
+                  <ion-input
                   labelPlacement="stacked"
                   [label]="'ADD_SENTENCE.ICON' | translate"
                   inputmode="emoji"
-                  maxlength="2"
                   [(ngModel)]="icon"
                   name="icon"
                   fill="solid"
+                  readonly="true"
                   required
                 ></ion-input>
+                <emoji-picker (emoji-click)="emojiClick($event)"></emoji-picker>
                 <ion-input
                   labelPlacement="stacked"
                   [label]="'ADD_SENTENCE.NAME' | translate"

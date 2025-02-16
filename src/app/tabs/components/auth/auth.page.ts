@@ -5,7 +5,8 @@ import {
   IonTitle,
   IonContent,
   IonButton, 
-  IonLabel
+  IonLabel,
+  IonSpinner,
 } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from './services';
@@ -24,14 +25,17 @@ import { CommonModule } from '@angular/common';
     TranslateModule,
     IonButton,
     IonLabel,
-    CommonModule
+    CommonModule,
+    IonSpinner
   ],
 })
 export class AuthPage {
+  loading = false;
 
   constructor(private authService: AuthService) {}
 
-  googleLogin() {
-    this.authService.googleLogin();
+  async googleLogin() {
+    this.loading = true;
+    this.authService.googleLogin().then(() => this.loading = false);
   }
 }

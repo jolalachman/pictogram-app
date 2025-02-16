@@ -43,6 +43,7 @@
     "@ionic/pwa-elements": "^3.3.0",
     "@ngx-translate/core": "^16.0.3",
     "@ngx-translate/http-loader": "^16.0.0",
+    "emoji-picker-element": "^1.26.1",
     "firebase": "^10.14.1",
     "ionicons": "^7.2.1",
     "openai": "^4.83.0",

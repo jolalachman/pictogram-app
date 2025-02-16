@@ -24,6 +24,9 @@
           <ion-item-option (click)="handleDelete(history.generatedSentence)" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
+      @if(historyList.length === 0) {
+        <ion-label><h1 class="highlight">{{ 'NO_DATA' | translate}}</h1></ion-label>
+      }
     }
     @else {
       <div class="spinner">
